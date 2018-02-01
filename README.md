@@ -8,4 +8,4 @@ Please, use [this](http://jekyllthemes.org/themes/front-cover/ "front-cover") te
 
 # Copyright and License
 
-Copyright (c) 2016 DashingCode. Code released under the [MIT](https://github.com/dashingcode/front-cover/blob/master/LICENSE "MIT") license.
+Copyright (c) 2016 DashingCode. Code released under the [MIT](https://github.com/whoisraibolt/whoisraibolt.github.io/blob/master/LICENSE "MIT") license.
