@@ -1,11 +1,11 @@
-# whoisraibolt.github.io
+# whoisraibolt.com.br
 
-My github-hosted personal site - https://whoisraibolt.github.io
+My github-hosted personal site - [whoisraibolt.com.br](https://whoisraibolt.com.br "https://whoisraibolt.com.br").
 
-# Theme name: [front-cover](http://jekyllthemes.org/themes/front-cover/ "front-cover")
+# AngularJS GitHub Repository
 
-Please, use [this](http://jekyllthemes.org/themes/front-cover/ "front-cover") template instead.
+An AngularJS service and directive to display your GitHub Repositories. Please, use [this](https://github.com/lucasconstantino/angular-github-repo "this") instead.
 
 # Copyright and License
 
-Copyright (c) 2016 DashingCode. Code released under the [MIT](https://github.com/whoisraibolt/whoisraibolt.github.io/blob/master/LICENSE "MIT") license.
+Code released under the [MIT](https://github.com/whoisraibolt/whoisraibolt.github.io/blob/master/LICENSE "MIT") license.
