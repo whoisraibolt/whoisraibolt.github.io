@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!-- Global Site Tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107732247-1"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'UA-107732247-1');
-        </script>
+        <!-- Title -->
+        <title>Alexandra Raibolt</title>
 
         <!-- Meta -->
         <meta charset="utf-8">
@@ -16,11 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Alexandra Raibolt">
         <meta name="description" content="My github-hosted personal site">
-        <meta name="keywords" content="alexandra, raibolt, pessoal, personal, site, sites, web, desenvolvimento, github, linkedin, lattes, c, c++, java, c#, python,
-        tensorflow, researcher, developer, web, graphic, artist, design, aprendizado, maquina, machine, learning, reconhecimento, padrões, pattern, recognition">
-
-        <!-- Title -->
-        <title>Alexandra Raibolt</title>
+        <meta name="keywords" content="alexandra, raibolt, pessoal, personal, site, sites, web, desenvolvimento, github, linkedin, lattes, c, c++, java, c#, python, tensorflow, researcher, developer, web, graphic, artist, design, aprendizado, maquina, machine, learning, reconhecimento, padrões, pattern, recognition, visão, computacional, computer, vision, ciência, dados, data, science, negócios, inteligência, business, intelligence">
 
         <!-- Favicon -->
         <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png">
@@ -32,7 +22,7 @@
         <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-icon-144x144.png">
         <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-icon-152x152.png">
         <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="images/favicon/android-icon-192x192.png">
         <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
@@ -41,34 +31,147 @@
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
 
-        <!-- -->
-        <link rel="canonical" href="/"> 
-        <link rel="stylesheet" href="css/front.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <!-- CSS -->
+        <link rel="stylesheet" href="assets/base.css">
+      	<link rel="stylesheet" href="assets/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+
+        <!-- Global Site Tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107732247-1"></script>
+
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-107732247-1');
+        </script>
+
+        <!-- jQuery -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+         
+        <script type="text/javascript">
+          jQuery(document).ready(function($) { 
+              $(".scroll").click(function(event){        
+                  event.preventDefault();
+                  $("html, body").animate({scrollTop:$(this.hash).offset().top}, 500);
+             });
+          });
+        </script>
     </head>
-    <body>
+
+    <body class="home">
+      <header>
+        <!-- Logo -->
+        <a class="logo" href="index.html">
+          <img src="images/alexandra-raibolt-logo.png" id="logo">
+        </a>
+
+        <!-- Navigation -->
+        <nav>
+          <a href="#about" class="active">sobre</a>
+          <a href="#projects" class="scroll">projetos</a>
+          <a href="#talks" class="scroll">talks</a>
+          <a href="#contact" class="scroll">contato</a>
+        </nav>
+      </header>
+
+      <!-- About -->
+      <section class="about">
         <div class="content">
-            <!-- Fullscreen -->
-            <img src="images/background.jpg" id="fullscreen">
-
-            <!-- Avatar -->
-            <img src="images/avatar.jpg" id="avatar">
-            
-            <!-- Name -->
-            <h1>Alexandra Raibolt</h1>
-            <h2>Student • Researcher • Developer</h2>
-
-            <!-- Description -->
-            <h4>Student of Tecnologia da Informação e Comunicação of the Faculdade de Educação Tecnológica do Estado do Rio de Janeiro (FAETERJ) and student of Sistemas de Informação of the Universidade Estácio de Sá (UNESA). I was Student of Iniciação Científica (IC) of the Laboratório Nacional de Computação Científica (LNCC) during the year 2017 in the area of pattern recognition and machine learning. In my free time, I like to work as a freelancer of Web Developer, Graphic Artist and Graphic Design. To view my research and development work, go to GitHub where I try to release them when possible.
-            </h4>
-
-                <!-- Icons -->
-                <ul>
-                    <li><a class="fa fa-2x fa-github" href="https://github.com/whoisraibolt" target="_blank"><span class="description">GitHub</span></a></li>
-                    <li><a class="fa fa-2x fa-linkedin" href="https://www.linkedin.com/in/whoisraibolt/" target="_blank" ><span class="description">LinkedIn</span></a></li>
-                    <li><a class="fa fa-2x fa-envelope" href="mailto:alexandra.raibolt@gmail.com" target="_blank" ><span class="description">Email</span></a></li>
-                </ul>
+          <h1>Graduanda em Tecnologia da Informação e Comunicação na Faculdade de Educação Tecnológica do Estado do Rio de Janeiro (FAETERJ) e graduanda em Sistemas de Informação na Universidade Estácio de Sá (UNESA). Apaixonada por Machine Learning, Computer Vision, Pattern Recognition, Data Science e Business Intelligence. Possui experiência na área de Machine Learning, com ênfase em Redes Neurais. Atualmente trabalha como estagiária de Business Intelligence e Administração de Dados no Sistema FIRJAN.</h1>
         </div>
+      </section>
+
+      <!-- Projects -->
+      <section class="projects" ng-app="repository">
+        <div class="content">
+          <h1 id="projects">Projetos</h1>
+
+          <p>Alguns repositórios no GitHub:</p>
+          <br>
+          <div github-repo="whoisraibolt/LBCNN" github-repo-options="{stars: false, forks: false, issues: true, author: true}"></div>
+          <div github-repo="whoisraibolt/Tensorflow-With-Own-Data" github-repo-options="{stars: false, forks: false, issues: true, author: true}"></div>
+          <div github-repo="whoisraibolt/Convert-csv-Dataset-Into-Original-Images" github-repo-options="{stars: false, forks: false, issues: true, author: true}"></div>
+          <div github-repo="whoisraibolt/Single-Layer-Perceptron" github-repo-options="{stars: false, forks: false, issues: true, author: true}"></div>
+        </div>
+      </section>
+
+      <!-- Talks -->
+      <section class="talks">
+        <div class="content">
+          <h1 id="talks">Talks</h1>
+          <ul>
+            <li>
+              <a href="https://whoisraibolt.com.br#talks">
+                <aside class="links">[SLIDE]</aside>
+                B2B e a sua evolução no Comércio Eletrônico (2016)
+              </a>
+            </li>
+
+            <li>
+              <a href="files/principais-frameworks-para-desenvolvimento-web-front-end.pdf" target="_blank">
+                <aside class="links">[SLIDE]</aside>
+                Principais Frameworks para desenvolvimento Web (Front-end) (2017)
+              </a>
+            </li>
+
+            <li>
+              <a href="files/data-mining-conceitos-e-aplicacoes.pdf" target="_blank">
+                <aside class="links">[SLIDE]</aside>
+                Data Mining - Conceitos e Aplicações (2017)
+              </a>
+            </li>
+
+            <li>
+              <a href="files/comptia-security+.pdf" target="_blank">
+                <aside class="links">[SLIDE]</aside>
+                CompTIA Security + (2018)
+              </a>
+            </li>
+
+            <li>
+              <a href="files/machine-learning-guia-para-iniciantes.pdf" target="_blank">
+                <aside class="links">[SLIDE]</aside>
+                Machine Learning: Guia para Iniciantes (2018)
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!--Contact -->
+      <section class="contact">
+        <div class="content">
+          <p id="contact"></p>
+
+          <!-- Avatar -->
+          <img src="images/alexandra-raibolt-avatar.jpg" id="avatar">
+
+          <h3>ALEXANDRA RAIBOLT</h3>
+
+          <div class="details">
+            <p><a href="https://github.com/whoisraibolt" target="_blank">GitHub</a></p>
+            <p><a href="https://www.linkedin.com/in/whoisraibolt/" target="_blank">LinkedIn</a></p>
+            <p><a href="http://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K8693241P4" target="_blank">Lattes</a></p>
+            <p><a href="mailto:alexandra.raibolt@gmail.com" target="_blank">E-mail</a></p>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <section class="footer">
+        <div class="content">
+        <p>Copyright © 2018 whoisraibolt</p>
+        <br>
+        <p>Alexandra Raibolt</p>
+        </div>
+      </section>
+
+        <!-- AnjularJS -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+        <script src="javascript/angular-github-repo.js"></script>
+
+        <script>
+            angular.module("repository", ["githubRepo"]);
+        </script>
     </body>
 </html>
