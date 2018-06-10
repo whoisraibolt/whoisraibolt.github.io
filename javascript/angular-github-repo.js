@@ -9,7 +9,7 @@
 angular.module('githubRepo', [])
   .factory('GitHubRepo', function ($http, $q) {
 
-    var githubApi = 'https://github.com/whoisraibolt/';
+    var githubApi = 'https://api.github.com/repos/';
 
     /**
      * GitHub Repository conntructor.
