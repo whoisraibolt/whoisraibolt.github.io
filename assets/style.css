@@ -45,7 +45,7 @@ a {
 }
 
 a:hover {
-    color: #039AAD;
+  color: #039AAD;
 }
 
 b, strong {
@@ -126,7 +126,7 @@ nav a:hover:after {
 }
 
 nav a.active:after {
-      border-color: black;
+  border-color: black;
 }
 
 .home section:nth-child(odd) {
@@ -270,12 +270,36 @@ nav a.active:after {
 }
 
 #logo {
-    height: 60px;
+  height: 60px;
 }
 
 #avatar {
-    height: 170px;
-    border-radius: 100%;
-    border: 5px solid white;
-    margin-bottom: 20px;
+  height: 170px;
+  border-radius: 100%;
+  border: 5px solid white;
+  margin-bottom: 20px;
+}
+
+#top {
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 15px;
+  color: #ffffff;
+  bottom: 30px;
+  right: 30px;
+  cursor: pointer;
+  padding: 15px;
+  background: rgb(4, 153, 173);
+  position: fixed;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#top:hover {
+  opacity:1;
 }
