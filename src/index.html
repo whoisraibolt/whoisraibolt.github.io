@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Title -->
+        <title>Alexandra Raibolt</title>
+
+        <!-- Meta -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Alexandra Raibolt">
+        <meta name="description" content="My github-hosted personal site">
+        <meta name="keywords" content="alexandra, raibolt, pessoal, personal, site, sites, web, desenvolvimento, github, linkedin, lattes, c, c++, java, c#, python, tensorflow, researcher, developer, web, graphic, artist, design, aprendizado, maquina, machine, learning, reconhecimento, padrões, pattern, recognition, visão, computacional, computer, vision, ciência, dados, data, science, negócios, inteligência, business, intelligence">
+
+        <!-- Favicon -->
+        <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="images/favicon/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+        <link rel="manifest" href="/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="assets/base.css">
+      	<link rel="stylesheet" href="assets/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+
+        <!-- Global Site Tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107732247-1"></script>
+
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-107732247-1');
+        </script>
+
+        <!-- jQuery -->
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
+        <script type="text/javascript">
+          jQuery(document).ready(function($){ 
+              $(".scroll").click(function(event){        
+                  event.preventDefault();
+                  $("html, body").animate({scrollTop:$(this.hash).offset().top}, 500);
+             });
+          });
+		</script>
+
+		<!-- jQuery -->
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+		<script type="text/javascript">
+	  	  jQuery(document).ready(function(){
+	         jQuery("#top").hide();
+	          jQuery("a#top").click(function(){
+   	            jQuery("html, body").animate({scrollTop:0}, 500);
+	            return false;
+	          });
+	          jQuery(window).scroll(function(){
+	            if (jQuery(this).scrollTop() > 150){
+	              jQuery("#top").fadeIn();
+	            } else {
+		          jQuery("#top").fadeOut();
+	            }
+	          });
+	      });
+       </script>
+    </head>
+
+    <body class="home">
+      <header>
+        <!-- Logo -->
+        <a class="logo" href="whoisraibolt.com.br">
+          <img src="images/alexandra-raibolt-logo.png" id="logo">
+        </a>
+
+        <!-- Navigation -->
+        <nav>
+          <a href="#about" class="active">about</a>
+          <a href="#projects" class="scroll">projects</a>
+          <a href="#talks" class="scroll">talks</a>
+          <a href="#contact" class="scroll">contact</a>
+        </nav>
+      </header>
+
+      <!-- About -->
+      <section class="about">
+        <div class="content">
+          <h1>Computer Vision Engineer and MSc in Computer Science and Computer Systems — PPgSC (2021) by the Military Institute of Engineering — IME. Currently, Alexandra is a PhD student in the Graduate Program in Defense Engineering — PPgED (2024) at the Military Engineering Institute — IME. Graduated in Information Systems in the Estácio de Sá University — UNESA (2019) and graduated in Information and Communication Technology in the Faculty of Technological Education of the State of Rio de Janeiro — FAETERJ (2018).
+
+            Alexandra has been working since 2015 with Machine Learning and Computer Vision techniques. Specialist in Neural Networks and Deep Convolutional Neural Networks, with solid experience in Computer Vision, Pattern Recognition and Mobile Robotics.
+            
+            Currently, Alexandra works with Machine Learning and Computer Vision at Fu2re Smart Solutions as Research Specialist I.
+            
+            In spare time, Alexandra likes to spend time with her family and dedicate herself to hobbies, such as juggling, drawing, and games. After all, we are not machines, despite working with them. 🦾'</h1>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section class="projects" ng-app="repository">
+        <div class="content">
+          <h1 id="projects">Projects</h1>
+
+          <p>Some projects in GitHub repositories:</p>
+          <br>
+          <div github-repo="whoisraibolt/DescNet" github-repo-options="{stars: true, forks: true, issues: false, author: true}"></div>
+          <br>
+          <div github-repo="whoisraibolt/LBCNN" github-repo-options="{stars: true, forks: true, issues: false, author: true}"></div>
+          <br>
+          <div github-repo="whoisraibolt/Feature-Detection-and-Description" github-repo-options="{stars: true, forks: true, issues: false, author: true}"></div>
+          <br>
+          <div github-repo="whoisraibolt/Feature-Detection-and-Matching" github-repo-options="{stars: true, forks: true, issues: false, author: true}"></div>
+        </div>
+      </section>
+
+      <!-- Talks -->
+      <section class="talks">
+        <div class="content">
+          <h1 id="talks">Talks</h1>
+          <ul>
+            <li>
+              <a href="#talks">
+                <aside class="links">[FAETERJ]</aside>
+                A Evolução B2B no Comércio Eletrônico (2016)
+              </a>
+            </li>
+
+            <li>
+              <a href="files/principais-frameworks-para-desenvolvimento-web-front-end.pdf" target="_blank">
+                <aside class="links">[FAETERJ]</aside>
+                Principais Frameworks para desenvolvimento Web (Front-end) (2017)
+              </a>
+            </li>
+
+            <li>
+              <a href="files/data-mining-conceitos-e-aplicacoes.pdf" target="_blank">
+                <aside class="links">[FAETERJ]</aside>
+                Data Mining - Conceitos e Aplicações (2017)
+              </a>
+            </li>
+
+            <li>
+              <a href="files/comptia-security+.pdf" target="_blank">
+                <aside class="links">[FAETERJ]</aside>
+                CompTIA Security + (2018)
+              </a>
+            </li>
+
+            <li>
+              <a href="files/machine-learning-guia-para-iniciantes.pdf" target="_blank">
+                <aside class="links">[IWD '18]</aside>
+                Machine Learning: Guia para Iniciantes (2018)
+              </a>
+            </li>
+
+            <li>
+              <a href="files/python-top-10-bibliotecas-para-data-science.pdf" target="_blank">
+                <aside class="links">[FAETERJ]</aside>
+                Python: Top 10 Bibliotecas para Data Science (2018)
+              </a>
+            </li>
+              
+            <li>
+              <a href="files/LBCNN-para-reconhecimento-de-expressoes-faciais-de-emocoes-basicas.pdf" target="_blank">
+                <aside class="links">[SLIDE]</aside>
+                LBCNN para Reconhecimento de Expressões Faciais de Emoções Básicas (2018)
+              </a>
+            </li>
+              
+            <li>
+              <a href="files/MONOGRAFIA-LBCNN-para-reconhecimento-de-expressoes-faciais-de-emocoes-basicas.pdf" target="_blank">
+                <aside class="links">[MONOGRAFIA]</aside>
+                LBCNN para Reconhecimento de Expressões Faciais de Emoções Básicas (2018)
+              </a>
+            </li>
+
+            <li>
+              <a href="https://github.com/whoisraibolt/Convolutional-Neural-Network-MNIST/blob/master/Convolutional-Neural-Network-MNIST.ipynb" target="_blank">
+                <aside class="links">[IWD '19]</aside>
+                Construa sua própria Rede Neural Convolucional em 3, 2, 1...! (2019)
+              </a>
+            </li>
+
+            <li>
+              <a href="files/open-source-por-que-eu-devo-comecar-a-contribuir-ja.pdf" target="_blank">
+                <aside class="links">[IWD '19]</aside>
+                Open Source: Por que eu devo começar a contribuir JÁ (2019)
+              </a>
+            </li>
+            <li>
+              <a href="files/open-source-por-que-eu-devo-comecar-a-contribuir-ja-flisol.pdf" target="_blank">
+                <aside class="links">[FLISOL '19]</aside>
+                Open Source: Por que eu devo começar a contribuir JÁ (2019)
+              </a>
+            </li>
+	          <li>
+              <a href="https://github.com/whoisraibolt/Google-Compute-Engine-Essentials/blob/master/Google%20Compute%20Engine%20Essentials.md" target="_blank">
+                <aside class="links">[GDG PETRÓPOLIS]</aside>
+                Google Compute Engine Essentials (2019)
+              </a>
+            </li>
+            <li>
+              <a href="files/compressao-de-imagem-usando-convolutional-autoencoders.pdf" target="_blank">
+                <aside class="links">[IME]</aside>
+                Compressão de Imagem: usando Convolutional Autoencoders (2019)
+              </a>
+            </li>
+            <li>
+              <a href="files/MONOGRAFIA-sistema-de-gerenciamento-de-ordem-de-servico-para-assistencia-tecnica.pdf" target="_blank">
+                <aside class="links">[UNDERGRADUATE THESIS]</aside>
+                Sistema de Gerenciamento de Ordem de Serviço para assistência técnica (2019)
+              </a>
+            </li>
+            <li>
+              <a href="files/comparative-evaluation-of-feature-descriptors-through-bag-of-visual-features-with-multilayer-perceptron-on-embedded-GPU-system.pdf" target="_blank">
+                <aside class="links">[LARS/SBR '20]</aside>
+                Comparative Evaluation of Feature Descriptors Through Bag of Visual Features with Multilayer Perceptron on Embedded GPU System (2020)
+              </a>
+            </li>
+            <li>
+              <a href="files/desafios-na-construcao-de-um-sistema-de-navegacao-de-robos-autonomos-moveis-baseado-em-visao-detecção-de-fechamento-de-loop.pdf" target="_blank">
+                <aside class="links">[VI Confeso]</aside>
+                Desafios na construção de um sistema de navegação de robôs autônomos móveis baseado em visão: Detecção de Fechamento de Loop (2021)
+              </a>
+            </li>
+            <li>
+              <a href="files/DESCNET-rede-neural-convolucional-de-descritores-uma-abordagem-para-o-fechamento-de-loop-em-visual-SLAM.pdf" target="_blank">
+                <aside class="links">[SLIDE]</aside>
+                DescNet — Rede Neural Convolucional de Descritores: uma abordagem para o fechamento de loop em Visual SLAM (2021)
+              </a>
+            </li>
+            <li>
+              <a href="files/DISSERTACAO-DESCNET-rede-neural-convolucional-de-descritores-uma-abordagem-para-o-fechamento-de-loop-em-visual-SLAM.pdf" target="_blank">
+                <aside class="links">[THESIS]</aside>
+                DescNet — Rede Neural Convolucional de Descritores: uma abordagem para o fechamento de loop em Visual SLAM (2021)
+              </a>
+            </li>
+            <li>
+              <a href="files/towards-loop-closure-detection-for-SLAM-applications-using-bag-of-visual-features-experiments-and-simulation.pdf" target="_blank">
+                <aside class="links">[III LAWCN]</aside>
+                Towards Loop Closure Detection for SLAM Applications using Bag of Visual Features: Experiments and Simulation (2021)
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="contact">
+        <div class="content">
+          <p id="contact"></p>
+
+          <!-- Avatar -->
+          <img src="images/alexandra-raibolt-avatar.png" id="avatar">
+
+          <h3>ALEXANDRA RAIBOLT</h3>
+
+          <div class="details">
+            <p><a href="https://github.com/whoisraibolt" target="_blank">GitHub</a></p>
+	    <p><a href="https://stackoverflow.com/users/8233320/whoisraibolt" target="_blank">StackOverflow</a></p>
+            <p><a href="https://www.linkedin.com/in/whoisraibolt" target="_blank">LinkedIn</a></p>
+	    <p><a href="https://orcid.org/0000-0002-8982-596X" target="_blank">Orcid ID</a></p>
+            <p><a href="http://lattes.cnpq.br/4144500977095845" target="_blank">Lattes</a></p>
+            <p><a href="mailto:alexandra.raibolt@gmail.com" target="_blank">E-mail</a></p>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <section class="footer">
+        <div class="content">
+        <p>Copyright © 2021 whoisraibolt</p>
+        <br>
+        <p>Alexandra Raibolt</p>
+        </div>
+		
+		<a id="top">
+      ⬆
+		</a>
+      </section>
+
+        <!-- AnjularJS -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+        <script src="javascript/angular-github-repo.js"></script>
+
+        <script>
+            angular.module("repository", ["githubRepo"]);
+        </script>
+    </body>
+</html>
