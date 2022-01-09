@@ -25,7 +25,7 @@ angular.module('githubRepo', [])
       this.stargazers = repo.stargazers_count;
       this.author = repo.owner.login;
       this.fullData = repo;
-      this.repo_url = github + this.author + '/' + this.name
+      this.repo_url = github + this.author + '/' + this.name;
     }
 
     var factory = {};
