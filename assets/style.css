@@ -166,6 +166,8 @@ nav a.active:after {
 .about h1 {
   font: 300 17px/1.8 "Quicksand", sans-serif;
   text-align: center;
+  margin-left: -450px;
+  margin-right: -450px;
   margin-bottom: 40px;
   letter-spacing: 4px;
 }
