@@ -9,9 +9,58 @@
 
 My github-hosted personal site - [https://whoisraibolt.com.br](https://whoisraibolt.com.br "https://whoisraibolt.com.br").
 
-## AngularJS GitHub Repository
+## Overview
 
-An AngularJS service and directive to display your GitHub Repositories. Please, use [this](https://github.com/lucasconstantino/angular-github-repo "this") instead.
+This repository contains a static personal website hosted with GitHub Pages.
+
+Main highlights:
+
+- Responsive layout and custom styling.
+- Dynamic GitHub project cards loaded from GitHub API.
+- Multilingual content with language switcher (`pt-BR`, `en`, `es`).
+- Dark/light theme toggle.
+
+## Tech Stack
+
+- HTML + CSS
+- Vanilla JavaScript (no framework dependency)
+- GitHub Pages
+
+## Internationalization
+
+Translations are organized by language under `texts/`:
+
+- `texts/PT-BR/`
+- `texts/EN/`
+- `texts/ES/`
+
+Each folder contains section files such as `about.txt`, `projects.txt`, and `footer.txt`.
+
+The language loader lives in `javascript/site-i18n.js`.
+
+## GitHub Projects Section
+
+Project cards are rendered by `javascript/angular-github-repo.js` (legacy filename, framework-free implementation).
+
+Data source:
+
+- `https://api.github.com/repos/{owner}/{repo}`
+
+If the API request fails, the UI shows a fallback card instead of breaking the section.
+
+## Local Development
+
+You can open `index.html` directly, but running from a local HTTP server is recommended.
+
+Example with Python:
+
+```bash
+python -m http.server 8080
+```
+
+Then open:
+
+- `http://localhost:8080`
 
 ## Copyright and License
 

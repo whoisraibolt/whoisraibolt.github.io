@@ -41,29 +41,40 @@
           gtag("config", "UA-107732247-1");
         </script>
 
-        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            var scrollLinks = document.querySelectorAll(".scroll");
+            Array.prototype.forEach.call(scrollLinks, function (link) {
+              link.addEventListener("click", function (event) {
+                var href = this.getAttribute("href");
+                if (!href || href.charAt(0) !== "#") {
+                  return;
+                }
 
-        <script type="text/javascript">
-          jQuery(document).ready(function($){
-            $(".scroll").click(function(event){
+                var target = document.querySelector(href);
+                if (!target) {
+                  return;
+                }
+
+                event.preventDefault();
+                var top = target.getBoundingClientRect().top + window.pageYOffset - 70;
+                window.scrollTo({ top: top, behavior: "smooth" });
+              });
+            });
+
+            var topButton = document.getElementById("top");
+            if (!topButton) {
+              return;
+            }
+
+            topButton.style.display = "none";
+            topButton.addEventListener("click", function (event) {
               event.preventDefault();
-              var target = $(this.hash);
-              if (target.length) {
-                $("html, body").animate({scrollTop: target.offset().top - 70}, 500);
-              }
+              window.scrollTo({ top: 0, behavior: "smooth" });
             });
 
-            $("#top").hide();
-            $("a#top").click(function(){
-              $("html, body").animate({scrollTop: 0}, 500);
-              return false;
-            });
-            $(window).scroll(function(){
-              if ($(this).scrollTop() > 150){
-                $("#top").fadeIn();
-              } else {
-                $("#top").fadeOut();
-              }
+            window.addEventListener("scroll", function () {
+              topButton.style.display = window.pageYOffset > 150 ? "flex" : "none";
             });
           });
         </script>
@@ -198,7 +209,7 @@
         </div>
       </section>
 
-      <section class="projects" ng-app="repository">
+      <section class="projects">
         <div class="section-inner">
           <h2 id="projects" class="section-title" data-i18n="projects.title">Projects</h2>
           <div class="section-line" aria-hidden="true"></div>
@@ -389,12 +400,8 @@
         <a id="top" aria-label="Scroll to top" title="Scroll to top" data-i18n-attr="aria-label:footer.topButton;title:footer.topButton">&#x2B06;</a>
       </footer>
 
-      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
       <script src="javascript/angular-github-repo.js"></script>
       <script src="javascript/site-i18n.js"></script>
-      <script>
-        angular.module("repository", ["githubRepo"]);
-      </script>
 
       <script>
         (function() {
