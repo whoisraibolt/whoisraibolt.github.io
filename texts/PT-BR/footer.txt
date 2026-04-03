@@ -1,0 +1,2 @@
+footer.copyright=Copyright &copy; 2026 whoisraibolt &middot; Alexandra Raibolt
+footer.topButton=Voltar ao topo

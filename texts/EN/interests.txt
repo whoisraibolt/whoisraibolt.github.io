@@ -1,0 +1,3 @@
+interests.title=Research Interests
+interests.desc=Main topics of research, collaboration, and technical development:
+interests.items=<li>Computer Vision</li><li>Pattern Recognition</li><li>Deep Learning</li><li>Ethical AI</li><li>Visual SLAM and Loop Closure</li><li>Medical Image Analysis</li><li>Mobile Robotics</li><li>AI in Education</li><li>Artificial Intelligence</li><li>Algorithmic Racism</li><li>Neural Networks</li><li>Large Language Models</li><li>Small Language Models</li><li>Retrieval-Augmented Generation</li><li>Cybersemantics</li><li>Environmental, Social, and Governance (ESG)</li>

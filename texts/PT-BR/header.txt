@@ -1,0 +1,12 @@
+header.about=sobre
+header.projects=projetos
+header.talks=palestras
+header.contact=contato
+header.logoAria=Início de Alexandra Raibolt
+header.navAria=Navegação principal
+header.languageSelector=Selecionar idioma
+header.languageMenuAria=Idiomas disponíveis
+header.themeToggle=Alternar modo claro/escuro
+header.languageOption.ptBR=PT-BR Português
+header.languageOption.en=GB English
+header.languageOption.es=ES Español

@@ -1,0 +1,5 @@
+projects.title=Proyectos
+projects.desc=Algunos proyectos en repositorios de GitHub:
+projects.cloneButton=Copiar comando git clone
+projects.starsLabel=Estrellas
+projects.forksLabel=Forks

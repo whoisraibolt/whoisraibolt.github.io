@@ -1,0 +1,12 @@
+header.about=about
+header.projects=projects
+header.talks=talks
+header.contact=contact
+header.logoAria=Alexandra Raibolt home
+header.navAria=Main navigation
+header.languageSelector=Select language
+header.languageMenuAria=Available languages
+header.themeToggle=Toggle dark/light mode
+header.languageOption.ptBR=PT-BR Português
+header.languageOption.en=GB English
+header.languageOption.es=ES Spanish

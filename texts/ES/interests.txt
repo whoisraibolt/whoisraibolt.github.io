@@ -1,0 +1,3 @@
+interests.title=Intereses de Investigación
+interests.desc=Temas principales de investigación, colaboración y desarrollo técnico:
+interests.items=<li>Visión por Computadora</li><li>Reconocimiento de Patrones</li><li>Deep Learning</li><li>IA Ética</li><li>Visual SLAM y Cierre de Bucle</li><li>Análisis de Imágenes Médicas</li><li>Robótica Móvil</li><li>IA en Educación</li><li>Inteligencia Artificial</li><li>Racismo Algorítmico</li><li>Redes Neuronales</li><li>Modelos de Lenguaje de Gran Escala</li><li>Modelos de Lenguaje de Pequeña Escala</li><li>Generación Mejorada por Recuperación</li><li>Cibersemántica</li><li>Ambiental, Social y Gobernanza (ESG)</li>

@@ -6,8 +6,9 @@
   --border-color: #30363d;
   --text-primary: #e6edf3;
   --text-secondary: #8b949e;
-  --accent: #58a6ff;
-  --accent-hover: #79c0ff;
+  --accent: #149eb2;
+  --accent-hover: #19d0c8;
+  --accent-gradient: linear-gradient(135deg, #19d0c8 0%, #149eb2 100%);
   --gradient-hero: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
 }
 
@@ -31,8 +32,9 @@ body.light-mode {
   --border-color: #d0d7de;
   --text-primary: #1f2328;
   --text-secondary: #656d76;
-  --accent: #0969da;
-  --accent-hover: #0550ae;
+  --accent: #0f8ea2;
+  --accent-hover: #149eb2;
+  --accent-gradient: linear-gradient(135deg, #19d0c8 0%, #0f8ea2 100%);
   --gradient-hero: linear-gradient(135deg, #f6f8fa 0%, #ffffff 100%);
 }
 
@@ -107,6 +109,14 @@ body.light-mode .navbar {
   width: auto;
 }
 
+body:not(.light-mode) #logo {
+  filter: brightness(0) invert(1);
+}
+
+body.light-mode #logo {
+  filter: none;
+}
+
 .navbar nav {
   display: flex;
   align-items: center;
@@ -145,6 +155,73 @@ body.light-mode .navbar {
 }
 
 /* Theme toggle button */
+.lang-picker {
+  position: relative;
+  margin-left: 8px;
+}
+
+.lang-toggle {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  width: 36px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  line-height: 1;
+}
+
+.lang-toggle:hover,
+.lang-toggle:focus-visible {
+  border-color: var(--accent);
+  background: var(--bg-secondary);
+}
+
+.lang-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 1200;
+  min-width: 180px;
+  padding: 8px;
+  margin: 0;
+  list-style: none;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--bg-card);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.lang-picker.open .lang-menu {
+  display: block;
+}
+
+.lang-menu button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  color: var(--text-primary);
+  padding: 8px 10px;
+  font-size: 0.93rem;
+  cursor: pointer;
+}
+
+.lang-menu button:hover,
+.lang-menu button:focus-visible,
+.lang-menu button.is-active {
+  color: var(--accent);
+  border-color: var(--border-color);
+  background: var(--bg-secondary);
+}
+
 .theme-toggle {
   background: transparent;
   border: 1px solid var(--border-color);
@@ -184,7 +261,9 @@ body.light-mode .navbar {
   width: 140px;
   height: 140px;
   border-radius: 50%;
-  border: 3px solid var(--accent);
+  box-sizing: border-box;
+  padding: 3px;
+  background: var(--accent-gradient);
   object-fit: cover;
   margin: 0 auto 28px;
 }
@@ -212,7 +291,7 @@ body.light-mode .navbar {
   color: var(--text-secondary);
   max-width: 700px;
   margin: 0 auto 40px;
-  text-align: left;
+  text-align: justify;
 }
 
 .hero-cta {
@@ -299,6 +378,114 @@ body.light-mode .navbar {
   font-size: 1rem;
 }
 
+/* ========== Interests / Timeline / Highlights ========== */
+.research-interests {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+}
+
+.career-timeline {
+  background: var(--bg-primary);
+  border-top: 1px solid var(--border-color);
+}
+
+.highlights {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+}
+
+.interest-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.interest-tags li {
+  padding: 8px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: default;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.interest-tags li:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--bg-primary);
+}
+
+.timeline-list {
+  margin-top: 14px;
+  border-left: 2px solid var(--accent);
+  padding-left: 18px;
+}
+
+.timeline-list li {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.timeline-list li:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-list li::before {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.timeline-year {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.4px;
+  margin-bottom: 6px;
+}
+
+.timeline-list p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.highlights-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.highlights-list li {
+  flex: 0 1 320px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-card);
+  padding: 14px 16px;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  cursor: default;
+}
+
+.highlights-list li:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+  transform: translateY(-3px);
+}
+
 /* ========== Projects ========== */
 .projects {
   background-color: var(--bg-secondary);
@@ -306,25 +493,39 @@ body.light-mode .navbar {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, minmax(280px, 420px));
+  justify-content: center;
   gap: 24px;
+}
+
+@media (max-width: 980px) {
+  .projects-grid {
+    grid-template-columns: minmax(0, 420px);
+  }
+}
+
+.projects-grid [github-repo] {
+  width: 100%;
 }
 
 /* Override base.css github-box styles */
 .github-box-wrap {
   display: block;
   width: 100%;
+  height: auto;
   margin: 0;
 }
 
 .github-box {
   font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: 12px;
   color: var(--text-secondary);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  height: 100%;
+  height: auto;
 }
 
 .github-box:hover {
@@ -361,18 +562,57 @@ body.light-mode .navbar {
 }
 
 .github-box .github-box-header .github-stats {
+  display: inline-flex;
+  align-items: center;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: 6px;
+  overflow: hidden;
 }
 
 .github-box .github-box-header .github-stats a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: auto;
+  line-height: 1;
+  padding: 4px 7px;
+  opacity: 1;
   color: var(--text-secondary);
+}
+
+.github-box .github-box-header .github-stats a::before {
+  font-family: inherit;
+  font-size: 0.72rem;
+  line-height: 1;
+  padding-right: 0;
+}
+
+.github-box .github-box-header .github-stats .repo-stars::before {
+  content: '★';
+}
+
+.github-box .github-box-header .github-stats .repo-forks::before {
+  content: '⎇';
 }
 
 .github-box .github-box-header .github-stats .repo-stars,
 .github-box .github-box-header .github-stats .repo-forks {
   border-color: var(--border-color);
+}
+
+.github-box .github-box-header .github-stats .repo-stars {
+  border-right: 1px solid var(--border-color);
+}
+
+.github-box .github-box-header .github-stats .repo-forks {
+  border-right: none;
+}
+
+.github-box .github-box-header .github-stats a:hover,
+.github-box .github-box-header .github-stats a:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 .github-box .github-box-content {
@@ -382,6 +622,11 @@ body.light-mode .navbar {
 }
 
 .github-box .github-box-download {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 46px;
+  padding: 12px;
   background: var(--bg-card);
   border-top: 1px solid var(--border-color);
   border-radius: 0 0 12px 12px;
@@ -395,15 +640,54 @@ body.light-mode .navbar {
   color: var(--text-primary);
 }
 
-.github-box .github-box-download .repo-download {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-bottom-color: var(--border-color);
-  color: var(--text-secondary);
+.github-box .github-box-download .repo-clone-actions {
+  display: inline-flex;
+  align-items: center;
 }
 
-.github-box .github-box-download .repo-download:hover {
-  color: var(--accent);
+.github-box .github-box-download .repo-clone-icon {
+  appearance: none;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  cursor: pointer;
+  background: var(--bg-secondary);
+}
+
+.github-box .github-box-download .repo-clone-icon::before,
+.github-box .github-box-download .repo-clone-icon::after {
+  content: '';
+  position: absolute;
+  border: 1px solid var(--text-secondary);
+  border-radius: 1px;
+}
+
+.github-box .github-box-download .repo-clone-icon::before {
+  width: 6px;
+  height: 5px;
+  top: 7px;
+  left: 5px;
+}
+
+.github-box .github-box-download .repo-clone-icon::after {
+  width: 6px;
+  height: 5px;
+  top: 4px;
+  left: 8px;
+  background: var(--bg-secondary);
+}
+
+.github-box .github-box-download .repo-clone-icon:hover,
+.github-box .github-box-download .repo-clone-icon:focus-visible {
+  border-color: var(--accent);
+}
+
+.github-box .github-box-download .repo-clone-icon:hover::before,
+.github-box .github-box-download .repo-clone-icon:hover::after,
+.github-box .github-box-download .repo-clone-icon:focus-visible::before,
+.github-box .github-box-download .repo-clone-icon:focus-visible::after {
   border-color: var(--accent);
 }
 
@@ -473,7 +757,9 @@ body.light-mode .navbar {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  border: 3px solid var(--accent);
+  box-sizing: border-box;
+  padding: 3px;
+  background: var(--accent-gradient);
   object-fit: cover;
   margin-bottom: 20px;
 }
@@ -569,6 +855,16 @@ body.light-mode .navbar {
     font-size: 0.8rem;
   }
 
+  .lang-picker {
+    margin-left: 6px;
+  }
+
+  .lang-toggle {
+    width: 33px;
+    height: 31px;
+    font-size: 0.9rem;
+  }
+
   #logo {
     height: 36px;
   }
@@ -595,7 +891,8 @@ body.light-mode .navbar {
   }
 
   .projects-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 420px);
+    justify-content: center;
   }
 
   .contact-links {

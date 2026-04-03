@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
     <head>
         <title>Alexandra Raibolt</title>
 
@@ -71,6 +71,7 @@
         <script>
           (function() {
             var saved = localStorage.getItem("theme");
+            if (saved === "light") {
               document.documentElement.setAttribute("data-theme-pending", "light");
             }
           })();
@@ -80,17 +81,28 @@
     <body>
       <header class="navbar" id="navbar">
         <div class="navbar-inner">
-          <a class="logo" href="https://whoisraibolt.com.br" aria-label="Alexandra Raibolt home">
+          <a class="logo" href="https://whoisraibolt.com.br" aria-label="Alexandra Raibolt home" data-i18n-attr="aria-label:header.logoAria">
             <img src="images/alexandra-raibolt-logo.png" id="logo" alt="Alexandra Raibolt logo">
           </a>
-          <nav aria-label="Main navigation">
-            <a href="#about" class="scroll">about</a>
-            <a href="#projects" class="scroll">projects</a>
-            <a href="#talks" class="scroll">talks</a>
-            <a href="#contact" class="scroll">contact</a>
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle dark/light mode">
+          <nav aria-label="Main navigation" data-i18n-attr="aria-label:header.navAria">
+            <a href="#about" class="scroll" data-i18n="header.about">about</a>
+            <a href="#projects" class="scroll" data-i18n="header.projects">projects</a>
+            <a href="#talks" class="scroll" data-i18n="header.talks">talks</a>
+            <a href="#contact" class="scroll" data-i18n="header.contact">contact</a>
+            <div class="lang-picker" id="languagePicker">
+              <button class="lang-toggle" id="languageToggle" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Selecionar idioma" title="Selecionar idioma" data-i18n-attr="aria-label:header.languageSelector;title:header.languageSelector">
+                <span aria-hidden="true">&#x1F310;</span>
+                <span class="sr-only" data-i18n="header.languageSelector">Selecionar idioma</span>
+              </button>
+              <ul class="lang-menu" id="languageMenu" role="menu" aria-label="Idiomas" data-i18n-attr="aria-label:header.languageMenuAria">
+                <li role="none"><button type="button" role="menuitem" data-lang="en" data-i18n="header.languageOption.en">GB English</button></li>
+                <li role="none"><button type="button" role="menuitem" data-lang="es" data-i18n="header.languageOption.es">ES Español</button></li>
+                <li role="none"><button type="button" role="menuitem" data-lang="pt-BR" data-i18n="header.languageOption.ptBR">BR Português (Brasil)</button></li>
+              </ul>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle dark/light mode" data-i18n-attr="aria-label:header.themeToggle;title:header.themeToggle">
               <span aria-hidden="true">&#x1F319;</span>
-              <span class="sr-only">Toggle dark/light mode</span>
+              <span class="sr-only" data-i18n="header.themeToggle">Toggle dark/light mode</span>
             </button>
           </nav>
         </div>
@@ -99,22 +111,22 @@
       <section class="about" id="about">
         <div class="hero-inner">
           <img src="images/alexandra-raibolt-avatar.png" class="hero-avatar" alt="Alexandra Raibolt">
-          <h1 class="hero-name">Alexandra Raibolt</h1>
-          <p class="hero-subtitle">Research Fellow &middot; PhD Student &middot; Computer Vision &middot; AI</p>
-          <p class="hero-bio">
+          <h1 class="hero-name">ALEXANDRA RAIBOLT</h1>
+          <p class="hero-subtitle" data-i18n="about.subtitle">Research Fellow &middot; PhD Student &middot; Computer Vision &middot; AI</p>
+          <p class="hero-bio" data-i18n-html="about.bio">
             Research fellow at the Foundation for Research, Development, and Innovation Support of the Brazilian Army (FAPEB) and Ph.D. student in the Graduate Program in Defense Engineering (PGEDD) at the Military Institute of Engineering (IME). Holds a master&apos;s degree from the Graduate Program in Systems and Computing (PGSC) at the Military Institute of Engineering (IME) (2021), as well as a bachelor&apos;s degree in Information Systems from UNESA (2019) and in Information and Communication Technology from FAETERJ (2018). Has been working since 2015 in Machine Learning and Computer Vision, specializing in Neural Networks and Deep Convolutional Neural Networks.
             <br><br>
             With solid experience in Computer Vision, Pattern Recognition, and Mobile Robotics, develops academic and extension projects in areas such as Artificial Intelligence and Ethical Algorithms. Currently serves as the coordinator of the Distance Learning Associate Degree in Systems Analysis and Development and as a professor at the Centro Universit&aacute;rio Serra dos &Oacute;rg&atilde;os (UNIFESO), teaching in the programs of Distance Learning Systems Analysis and Development and Computer Science.
             <br><br>
             Responsible for content curation, pedagogical review, question development, and audiovisual production as a content creator.
             <br><br>
-            Coordinated the extension project &quot;Unveiling Algorithmic Racism: A Contemporary Analysis&quot; (2024), linked to the Academic Directorate of Human and Technological Sciences (DACHT Social) at UNIFESO.
+            Coordinated the extension project &quot;Unveiling Algorithmic Racism: A Contemporary Analysis&quot; (2024), linked to the Academic Directorate of Human and Technological Sciences (DACHT Social) at UNIFESO — Centro Universitário Serra dos Órgãos.
             <br><br>
-            Coordinated the scientific initiation project &quot;Thoracic Radiological Diagnosis Support System with Deep Convolutional Neural Networks&quot; (2022/2023), developed under the Scientific Initiation and Research Plan (PICPq) at UNIFESO.
+            Coordinated the scientific initiation project &quot;Thoracic Radiological Diagnosis Support System with Deep Convolutional Neural Networks&quot; (2022/2023), developed under the Scientific Initiation and Research Plan (PICPq) at UNIFESO — Centro Universitário Serra dos Órgãos.
           </p>
           <div class="hero-cta">
-            <a href="#projects" class="btn btn-primary scroll">View Projects</a>
-            <a href="#contact" class="btn btn-secondary scroll">Contact Me</a>
+            <a href="#projects" class="btn btn-primary scroll" data-i18n="about.cta.projects">View Projects</a>
+            <a href="#contact" class="btn btn-secondary scroll" data-i18n="about.cta.contact">Contact Me</a>
           </div>
           <div class="scroll-indicator" aria-hidden="true">
             <span>&#8595;</span>
@@ -122,22 +134,87 @@
         </div>
       </section>
 
+      <section class="research-interests">
+        <div class="section-inner">
+          <h2 id="interests" class="section-title" data-i18n="interests.title">Research Interests</h2>
+          <div class="section-line" aria-hidden="true"></div>
+          <p class="section-desc" data-i18n="interests.desc">Main topics of research, collaboration, and technical development:</p>
+          <ul class="interest-tags" data-i18n-html="interests.items">
+            <li>Computer Vision</li>
+            <li>Pattern Recognition</li>
+            <li>Deep Learning</li>
+            <li>Ethical AI</li>
+            <li>Visual SLAM and Loop Closure</li>
+            <li>Medical Image Analysis</li>
+            <li>Mobile Robotics</li>
+            <li>AI in Education</li>
+            <li>Artificial Intelligence</li>
+            <li>Algorithmic Racism</li>
+            <li>Neural Networks</li>
+            <li>Large Language Models</li>
+            <li>Small Language Models</li>
+            <li>Retrieval-Augmented Generation</li>
+            <li>Cybersemantics</li>
+            <li>Environmental, Social, and Governance (ESG)</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="career-timeline">
+        <div class="section-inner">
+          <h2 id="timeline" class="section-title" data-i18n="timeline.title">Linha do Tempo</h2>
+          <div class="section-line" aria-hidden="true"></div>
+          <ul class="timeline-list" data-i18n-html="timeline.items">
+            <li><span class="timeline-year">2015 - 2019</span><p>Graduação em Tecnologia da Informação e Comunicação na FAETERJ — Faculdade de Educação Tecnológica do Estado do Rio de Janeiro e em Sistemas de Informação na Universidade Estácio de Sá — UNESA.</p></li>
+            <li><span class="timeline-year">2017</span><p>Bolsista de Iniciação Científica no LNCC — pesquisa em Machine Learning e Reconhecimento de Padrões com LBP, MLP e CNN em TensorFlow (CNPq).</p></li>
+            <li><span class="timeline-year">2020</span><p>Analista de BI e Dev Full-Stack na Inpartec (cliente Firjan) — sistema de Orçamento de Pessoal em Angular + .NET Core API e automações de RH com Power Automate e SharePoint Online.</p></li>
+            <li><span class="timeline-year">2020</span><p>Analista de BI e Adm. de Dados na GM5 (autônomo, cliente Firjan) — Catálogo de Dados e adequação à LGPD nas bases Corporativas e de RH.</p></li>
+            <li><span class="timeline-year">2020</span><p>Analista de BI e Adm. de Dados na Firjan — descoberta e classificação de dados nas bases Corporativas e de RH (SQL Server e Azure SQL Server), garantindo Governança de Dados e adequação à LGPD.</p></li>
+            <li><span class="timeline-year">2020 - 2022</span><p>Computer Vision Engineer na Fu2re Smart Solutions — SmartReader (API RESTful FastAPI/Uvicorn), detecção de fraudes em medidores de energia e leitura automática de tara/validade em botijões de gás.</p></li>
+            <li><span class="timeline-year">2020 - 2021</span><p>Coautora do livro "Jornada Python" pela Jornada Colaborativa (Editora Brasport, ISBN 978-6588431-48-1) — capítulos sobre Ambiente Virtual, Deep Learning e Visão Computacional.</p></li>
+            <li><span class="timeline-year">2021</span><p>Mestre em Sistemas e Computação, IME (PGSC).</p></li>
+            <li><span class="timeline-year">2022</span><p>Computer Vision Engineer na Acertpix — Passive Facial Liveness (YOLOv7/Darknet), reconhecimento automático de QR Code e extração de metadados em documentos para prevenção de fraudes.</p></li>
+            <li><span class="timeline-year">2022 - 2023</span><p>Coordenadora da Iniciação Cientifica "Apoio ao Diagnóstico Radiológico Torácico com CNNs Profundas" no UNIFESO — Centro Universitário Serra dos Órgãos (PICPq).</p></li>
+            <li><span class="timeline-year">2022 - Atual</span><p>Professora Assistente e membra do NDE de Ciência da Computação no UNIFESO — Centro Universitário Serra dos Órgãos.</p></li>
+            <li><span class="timeline-year">2023 - 2025</span><p>Coordenadora do Curso Superior em Análise e Desenvolvimento de Sistemas/EaD e membra do NDE de Análise e Desenvolvimento de Sistemas/EaD no UNIFESO — Centro Universitário Serra dos Órgãos.</p></li>
+            <li><span class="timeline-year">2024</span><p>Coordenação do projeto de extensão "Desvendando o Racismo Algorítmico" no UNIFESO — Centro Universitário Serra dos Órgãos (DACHT Social).</p></li>
+            <li><span class="timeline-year">2024 - Atual</span><p>Pesquisadora bolsista na Fundação de Apoio à Pesquisa, Desenvolvimento e Inovação do Exército Brasileiro (FAPEB) e doutoranda em Engenharia de Defesa no IME — Instituto Militar de Engenharia (PGEDD).</p></li>
+            <li><span class="timeline-year">2026 - Atual</span><p>Coordenadora da Iniciação Cientifica "Smart Impact IA: Plataforma Inteligente para a Promoção do ESG e Desenvolvimento Sustentável Regional" no UNIFESO — Centro Universitário Serra dos Órgãos (PICPq).</p></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="highlights">
+        <div class="section-inner">
+          <h2 id="highlights" class="section-title" data-i18n="highlights.title">Highlights</h2>
+          <div class="section-line" aria-hidden="true"></div>
+          <ul class="highlights-list" data-i18n-html="highlights.items">
+            <li>🥇 <strong>2025</strong> — Best Paper Award — Main Track, 18th Seminar on Ontology Research in Brazil (ONTOBRAS).</li>
+            <li>🥉 <strong>2023</strong> — Third place in the Unifeso Academic Production Incentive Award, UNIFESO — Serra dos Órgãos University Center (Unifeso).</li>
+            <li>🥉 <strong>2023</strong> — Third place at InovaHack, Movimento Black Money (MBM).</li>
+            <li>🥉 <strong>2022</strong> — Third place in the Professor Unifeso Award, UNIFESO — Serra dos Órgãos University Center (Unifeso).</li>
+            <li>🥉 <strong>2020</strong> — Third Best Paper, 17th IEEE Latin American Robotics Symposium/8th Brazilian Symposium of Robotics (LARS/SBR).</li>
+          </ul>
+        </div>
+      </section>
+
       <section class="projects" ng-app="repository">
         <div class="section-inner">
-          <h2 id="projects" class="section-title">Projects</h2>
+          <h2 id="projects" class="section-title" data-i18n="projects.title">Projects</h2>
           <div class="section-line" aria-hidden="true"></div>
-          <p class="section-desc">Some projects in GitHub repositories:</p>
+          <p class="section-desc" data-i18n="projects.desc">Some projects in GitHub repositories:</p>
           <div class="projects-grid">
             <div github-repo="whoisraibolt/Feature-Detection-and-Matching" github-repo-options="{stars: true, forks: true, issues: false, author: true}"></div>
             <div github-repo="whoisraibolt/Feature-Detection-and-Description" github-repo-options="{stars: true, forks: true, issues: false, author: true}"></div>
             <div github-repo="whoisraibolt/LBCNN" github-repo-options="{stars: true, forks: true, issues: false, author: true}"></div>
+            <div github-repo="whoisraibolt/JORNADA-PYTHON" github-repo-options="{stars: true, forks: true, issues: false, author: true}"></div>
           </div>
         </div>
       </section>
 
       <section class="talks">
         <div class="section-inner">
-          <h2 id="talks" class="section-title">Talks</h2>
+          <h2 id="talks" class="section-title" data-i18n="talks.title">Talks</h2>
           <div class="section-line" aria-hidden="true"></div>
           <ul class="talks-list">
             <li class="talk-item">
@@ -278,7 +355,7 @@
 
       <section class="contact">
         <div class="section-inner" id="contact">
-          <h2 class="section-title">Get in touch</h2>
+          <h2 class="section-title" data-i18n="contact.title">Get in touch</h2>
           <div class="section-line" aria-hidden="true"></div>
           <img src="images/alexandra-raibolt-avatar.png" id="avatar" alt="Alexandra Raibolt">
           <h3 class="contact-name">Alexandra Raibolt</h3>
@@ -307,13 +384,14 @@
 
       <footer class="footer">
         <div class="footer-inner">
-          <p>Copyright &copy; 2025 whoisraibolt &middot; Alexandra Raibolt</p>
+          <p data-i18n-html="footer.copyright">Copyright &copy; 2026 whoisraibolt &middot; Alexandra Raibolt</p>
         </div>
-        <a id="top" aria-label="Scroll to top">&#x2B06;</a>
+        <a id="top" aria-label="Scroll to top" title="Scroll to top" data-i18n-attr="aria-label:footer.topButton;title:footer.topButton">&#x2B06;</a>
       </footer>
 
       <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
       <script src="javascript/angular-github-repo.js"></script>
+      <script src="javascript/site-i18n.js"></script>
       <script>
         angular.module("repository", ["githubRepo"]);
       </script>
@@ -350,5 +428,6 @@
           });
         })();
       </script>
+
     </body>
 </html>

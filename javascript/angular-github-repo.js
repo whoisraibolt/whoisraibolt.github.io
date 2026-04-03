@@ -56,11 +56,11 @@ angular.module('githubRepo', [])
         '<div class="github-box">' +
           '<div class="github-box-header">' +
             '<h3>' +
-              '<a href="{{repo_url}}" target="_blank">{{name}}</a><small ng-if="options.author">, by {{author}}</small>' +
+              '<a href="{{repo_url}}" target="_blank">{{name}}</a>' +
             '</h3>' +
             '<div class="github-stats">' +
-              '<a ng-if="options.stars" class="repo-stars" title="Stars" data-icon="7" href="{{repo_url}}/stargazers" target="_blank">{{stargazers}}</a>' +
-              '<a ng-if="options.forks" class="repo-forks" title="Forks" data-icon="f" href="{{repo_url}}/network/members" target="_blank">{{forks}}</a>' +
+              '<a ng-if="options.stars" class="repo-stars" ng-attr-title="{{starsLabel}}" data-icon="7" href="{{repo_url}}/stargazers" target="_blank">{{stargazers}}</a>' +
+              '<a ng-if="options.forks" class="repo-forks" ng-attr-title="{{forksLabel}}" data-icon="f" href="{{repo_url}}/network/members" target="_blank">{{forks}}</a>' +
               '<a ng-if="options.issues" class="repo-issues" title="Issues" data-icon="i" href="{{repo_url}}/issues" target="_blank">{{issues}}</a>' +
             '</div>' +
           '</div>' +
@@ -68,8 +68,9 @@ angular.module('githubRepo', [])
             '<p>{{description}}</p>' +
           '</div>' +
           '<div class="github-box-download">' +
-            '<p class="repo-update">Latest commit to <strong>master</strong> on {{pushedAt | date:options.dateFormat}}</p>' +
-            '<a class="repo-download" title="Download as zip" data-icon="w" href="{{url}}/zipball/master"></a>' +
+            '<div class="repo-clone-actions">' +
+              '<button class="repo-clone-icon" type="button" ng-click="copyCloneCommand()" ng-attr-aria-label="{{cloneLabel}}" ng-attr-title="{{cloneLabel}}"></button>' +
+            '</div>' +
           '</div>' +
         '</div>',
       link: function(scope, element, attr) {
@@ -88,6 +89,40 @@ angular.module('githubRepo', [])
             angular.extend(scope, repo, {
               options: defaults
             });
+
+            function translate(key, fallback) {
+              if (window.SiteI18n && typeof window.SiteI18n.get === 'function') {
+                return window.SiteI18n.get(key, fallback);
+              }
+              return fallback;
+            }
+
+            function applyLabels() {
+              scope.cloneLabel = translate('projects.cloneButton', 'Copiar comando git clone');
+              scope.starsLabel = translate('projects.starsLabel', 'Stars');
+              scope.forksLabel = translate('projects.forksLabel', 'Forks');
+            }
+
+            applyLabels();
+
+            var onLanguageChange = function () {
+              scope.$applyAsync(function () {
+                applyLabels();
+              });
+            };
+
+            document.addEventListener('site-language-change', onLanguageChange);
+            scope.$on('$destroy', function () {
+              document.removeEventListener('site-language-change', onLanguageChange);
+            });
+
+            scope.copyCloneCommand = function () {
+              var cloneCommand = 'git clone ' + scope.repo_url + '.git';
+
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(cloneCommand);
+              }
+            };
 
             angular.extend(scope.options, attr.githubRepoOptions ? $parse(attr.githubRepoOptions)(scope) : {});
           })
