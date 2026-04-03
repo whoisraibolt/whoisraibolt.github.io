@@ -203,6 +203,9 @@ body.light-mode #logo {
 }
 
 .lang-menu button {
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
   width: 100%;
   text-align: left;
   background: transparent;

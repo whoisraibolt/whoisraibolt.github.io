@@ -1,4 +1,5 @@
 (function () {
+  var assetVersion = "20260403-1";
   var languagePicker = document.getElementById("languagePicker");
   var languageToggle = document.getElementById("languageToggle");
   var languageMenu = document.getElementById("languageMenu");
@@ -56,7 +57,7 @@
     var folder = languageFolders[language] || languageFolders[defaultLanguage];
 
     var requests = sections.map(function (section) {
-      return fetch("texts/" + folder + "/" + section + ".txt", { cache: "no-store" })
+      return fetch("texts/" + folder + "/" + section + ".txt?v=" + assetVersion, { cache: "no-store" })
         .then(function (response) {
           if (!response.ok) {
             throw new Error("Unable to load section " + section);
