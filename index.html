@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <!-- Title -->
         <title>Alexandra Raibolt</title>
 
-        <!-- Meta -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Alexandra Raibolt">
         <meta name="description" content="My github-hosted personal site">
-        <meta name="keywords" content="alexandra, raibolt, pessoal, personal, site, sites, web, desenvolvimento, github, linkedin, lattes, c, c++, java, c#, python, tensorflow, researcher, developer, web, graphic, artist, design, aprendizado, maquina, machine, learning, reconhecimento, padrões, pattern, recognition, visão, computacional, computer, vision, ciência, dados, data, science, negócios, inteligência, business, intelligence">
+        <meta name="keywords" content="alexandra, raibolt, pessoal, personal, site, sites, web, desenvolvimento, github, linkedin, lattes, c, c++, java, c#, python, tensorflow, researcher, developer, web, graphic, artist, design, aprendizado, maquina, machine, learning, reconhecimento, padroes, pattern, recognition, visao, computacional, computer, vision, ciencia, dados, data, science, negocios, inteligencia, business, intelligence">
+        <meta name="theme-color" content="#0d1117">
 
-        <!-- Favicon -->
         <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png">
         <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-icon-72x72.png">
@@ -29,310 +27,328 @@
         <link rel="manifest" href="/manifest.json">
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-        <meta name="theme-color" content="#ffffff">
 
-        <!-- CSS -->
         <link rel="stylesheet" href="assets/base.css">
-      	<link rel="stylesheet" href="assets/style.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+        <link rel="stylesheet" href="assets/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
 
-        <!-- Global Site Tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107732247-1"></script>
 
         <script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'UA-107732247-1');
+          gtag("js", new Date());
+          gtag("config", "UA-107732247-1");
         </script>
 
-        <!-- jQuery -->
-        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-
-        <script type="text/javascript">
-          jQuery(document).ready(function($){ 
-              $(".scroll").click(function(event){        
-                  event.preventDefault();
-                  $("html, body").animate({scrollTop:$(this.hash).offset().top}, 500);
-             });
-          });
-		</script>
-
-		<!-- jQuery -->
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 
-		<script type="text/javascript">
-	  	  jQuery(document).ready(function(){
-	         jQuery("#top").hide();
-	          jQuery("a#top").click(function(){
-   	            jQuery("html, body").animate({scrollTop:0}, 500);
-	            return false;
-	          });
-	          jQuery(window).scroll(function(){
-	            if (jQuery(this).scrollTop() > 150){
-	              jQuery("#top").fadeIn();
-	            } else {
-		          jQuery("#top").fadeOut();
-	            }
-	          });
-	      });
-       </script>
+        <script type="text/javascript">
+          jQuery(document).ready(function($){
+            $(".scroll").click(function(event){
+              event.preventDefault();
+              var target = $(this.hash);
+              if (target.length) {
+                $("html, body").animate({scrollTop: target.offset().top - 70}, 500);
+              }
+            });
+
+            $("#top").hide();
+            $("a#top").click(function(){
+              $("html, body").animate({scrollTop: 0}, 500);
+              return false;
+            });
+            $(window).scroll(function(){
+              if ($(this).scrollTop() > 150){
+                $("#top").fadeIn();
+              } else {
+                $("#top").fadeOut();
+              }
+            });
+          });
+        </script>
+
+        <script>
+          (function() {
+            var saved = localStorage.getItem("theme");
+              document.documentElement.setAttribute("data-theme-pending", "light");
+            }
+          })();
+        </script>
     </head>
 
-    <body class="home">
-      <header>
-        <!-- Logo -->
-        <a class="logo" href="whoisraibolt.com.br">
-          <img src="images/alexandra-raibolt-logo.png" id="logo">
-        </a>
-
-        <!-- Navigation -->
-        <nav>
-          <a href="#about" class="active">about</a>
-          <a href="#projects" class="scroll">projects</a>
-          <a href="#talks" class="scroll">talks</a>
-          <a href="#contact" class="scroll">contact</a>
-        </nav>
+    <body>
+      <header class="navbar" id="navbar">
+        <div class="navbar-inner">
+          <a class="logo" href="https://whoisraibolt.com.br" aria-label="Alexandra Raibolt home">
+            <img src="images/alexandra-raibolt-logo.png" id="logo" alt="Alexandra Raibolt logo">
+          </a>
+          <nav aria-label="Main navigation">
+            <a href="#about" class="scroll">about</a>
+            <a href="#projects" class="scroll">projects</a>
+            <a href="#talks" class="scroll">talks</a>
+            <a href="#contact" class="scroll">contact</a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" title="Toggle dark/light mode">
+              <span aria-hidden="true">&#x1F319;</span>
+              <span class="sr-only">Toggle dark/light mode</span>
+            </button>
+          </nav>
+        </div>
       </header>
 
-      <!-- About -->
-      <section class="about">
-        <div class="content">
-          <h1>
-            Research fellow at the Foundation for Research, Development, and Innovation Support of the Brazilian Army (FAPEB) and Ph.D. student in the Graduate Program in Defense Engineering (PGEDD) at the Military Institute of Engineering (IME). Holds a master’s degree from the Graduate Program in Systems and Computing (PGSC) at the Military Institute of Engineering (IME) (2021), as well as a bachelor’s degree in Information Systems from UNESA (2019) and in Information and Communication Technology from FAETERJ (2018). Has been working since 2015 in Machine Learning and Computer Vision, specializing in Neural Networks and Deep Convolutional Neural Networks.
-            <br>
-            <br>
-            With solid experience in Computer Vision, Pattern Recognition, and Mobile Robotics, develops academic and extension projects in areas such as Artificial Intelligence and Ethical Algorithms. Currently serves as the coordinator of the Distance Learning Associate Degree in Systems Analysis and Development and as a professor at the Centro Universitário Serra dos Órgãos (UNIFESO), teaching in the programs of Distance Learning Systems Analysis and Development and Computer Science.
-            <br>
-            <br>
+      <section class="about" id="about">
+        <div class="hero-inner">
+          <img src="images/alexandra-raibolt-avatar.png" class="hero-avatar" alt="Alexandra Raibolt">
+          <h1 class="hero-name">Alexandra Raibolt</h1>
+          <p class="hero-subtitle">Research Fellow &middot; PhD Student &middot; Computer Vision &middot; AI</p>
+          <p class="hero-bio">
+            Research fellow at the Foundation for Research, Development, and Innovation Support of the Brazilian Army (FAPEB) and Ph.D. student in the Graduate Program in Defense Engineering (PGEDD) at the Military Institute of Engineering (IME). Holds a master&apos;s degree from the Graduate Program in Systems and Computing (PGSC) at the Military Institute of Engineering (IME) (2021), as well as a bachelor&apos;s degree in Information Systems from UNESA (2019) and in Information and Communication Technology from FAETERJ (2018). Has been working since 2015 in Machine Learning and Computer Vision, specializing in Neural Networks and Deep Convolutional Neural Networks.
+            <br><br>
+            With solid experience in Computer Vision, Pattern Recognition, and Mobile Robotics, develops academic and extension projects in areas such as Artificial Intelligence and Ethical Algorithms. Currently serves as the coordinator of the Distance Learning Associate Degree in Systems Analysis and Development and as a professor at the Centro Universit&aacute;rio Serra dos &Oacute;rg&atilde;os (UNIFESO), teaching in the programs of Distance Learning Systems Analysis and Development and Computer Science.
+            <br><br>
             Responsible for content curation, pedagogical review, question development, and audiovisual production as a content creator.
-	    <br>
-            <br>  
-	    Coordinated the extension project "Unveiling Algorithmic Racism: A Contemporary Analysis" (2024), linked to the Academic Directorate of Human and Technological Sciences (DACHT Social) at UNIFESO.
-            <br>
-            <br>
-            Coordinated the scientific initiation project "Thoracic Radiological Diagnosis Support System with Deep Convolutional Neural Networks" (2022/2023), developed under the Scientific Initiation and Research Plan (PICPq) at UNIFESO.
-	        </h1>
+            <br><br>
+            Coordinated the extension project &quot;Unveiling Algorithmic Racism: A Contemporary Analysis&quot; (2024), linked to the Academic Directorate of Human and Technological Sciences (DACHT Social) at UNIFESO.
+            <br><br>
+            Coordinated the scientific initiation project &quot;Thoracic Radiological Diagnosis Support System with Deep Convolutional Neural Networks&quot; (2022/2023), developed under the Scientific Initiation and Research Plan (PICPq) at UNIFESO.
+          </p>
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary scroll">View Projects</a>
+            <a href="#contact" class="btn btn-secondary scroll">Contact Me</a>
+          </div>
+          <div class="scroll-indicator" aria-hidden="true">
+            <span>&#8595;</span>
+          </div>
         </div>
       </section>
 
-      <!-- Projects -->
       <section class="projects" ng-app="repository">
-        <div class="content">
-          <h1 id="projects">Projects</h1>
-
-          <p>Some projects in GitHub repositories:</p>
-          <br>
-          <div github-repo="whoisraibolt/Feature-Detection-and-Matching" github-repo-options="{stars: true, forks: true, issues: false, author: true}"></div>
-          <br>
-          <div github-repo="whoisraibolt/Feature-Detection-and-Description" github-repo-options="{stars: true, forks: true, issues: false, author: true}"></div>
-          <br>
-          <div github-repo="whoisraibolt/LBCNN" github-repo-options="{stars: true, forks: true, issues: false, author: true}"></div>
+        <div class="section-inner">
+          <h2 id="projects" class="section-title">Projects</h2>
+          <div class="section-line" aria-hidden="true"></div>
+          <p class="section-desc">Some projects in GitHub repositories:</p>
+          <div class="projects-grid">
+            <div github-repo="whoisraibolt/Feature-Detection-and-Matching" github-repo-options="{stars: true, forks: true, issues: false, author: true}"></div>
+            <div github-repo="whoisraibolt/Feature-Detection-and-Description" github-repo-options="{stars: true, forks: true, issues: false, author: true}"></div>
+            <div github-repo="whoisraibolt/LBCNN" github-repo-options="{stars: true, forks: true, issues: false, author: true}"></div>
+          </div>
         </div>
       </section>
 
-      <!-- Talks -->
       <section class="talks">
-        <div class="content">
-          <h1 id="talks">Talks</h1>
-          <ul>
-            <li>
+        <div class="section-inner">
+          <h2 id="talks" class="section-title">Talks</h2>
+          <div class="section-line" aria-hidden="true"></div>
+          <ul class="talks-list">
+            <li class="talk-item">
               <a href="#talks">
-                <aside class="links">[FAETERJ]</aside>
-                A Evolução B2B no Comércio Eletrônico (2016)
+                <span class="talk-badge">[FAETERJ] 2016</span>
+                <span class="talk-title">A Evolu&ccedil;&atilde;o B2B no Com&eacute;rcio Eletr&ocirc;nico</span>
               </a>
             </li>
-
-            <li>
+            <li class="talk-item">
               <a href="files/principais-frameworks-para-desenvolvimento-web-front-end.pdf" target="_blank">
-                <aside class="links">[FAETERJ]</aside>
-                Principais Frameworks para desenvolvimento Web (Front-end) (2017)
+                <span class="talk-badge">[FAETERJ] 2017</span>
+                <span class="talk-title">Principais Frameworks para desenvolvimento Web (Front-end)</span>
               </a>
             </li>
-
-            <li>
+            <li class="talk-item">
               <a href="files/data-mining-conceitos-e-aplicacoes.pdf" target="_blank">
-                <aside class="links">[FAETERJ]</aside>
-                Data Mining - Conceitos e Aplicações (2017)
+                <span class="talk-badge">[FAETERJ] 2017</span>
+                <span class="talk-title">Data Mining - Conceitos e Aplica&ccedil;&otilde;es</span>
               </a>
             </li>
-
-            <li>
+            <li class="talk-item">
               <a href="files/comptia-security+.pdf" target="_blank">
-                <aside class="links">[FAETERJ]</aside>
-                CompTIA Security + (2018)
+                <span class="talk-badge">[FAETERJ] 2018</span>
+                <span class="talk-title">CompTIA Security +</span>
               </a>
             </li>
-
-            <li>
+            <li class="talk-item">
               <a href="files/machine-learning-guia-para-iniciantes.pdf" target="_blank">
-                <aside class="links">[IWD '18]</aside>
-                Machine Learning: Guia para Iniciantes (2018)
+                <span class="talk-badge">[IWD &apos;18] 2018</span>
+                <span class="talk-title">Machine Learning: Guia para Iniciantes</span>
               </a>
             </li>
-
-            <li>
+            <li class="talk-item">
               <a href="files/python-top-10-bibliotecas-para-data-science.pdf" target="_blank">
-                <aside class="links">[FAETERJ]</aside>
-                Python: Top 10 Bibliotecas para Data Science (2018)
+                <span class="talk-badge">[FAETERJ] 2018</span>
+                <span class="talk-title">Python: Top 10 Bibliotecas para Data Science</span>
               </a>
             </li>
-
-            <li>
+            <li class="talk-item">
               <a href="files/LBCNN-para-reconhecimento-de-expressoes-faciais-de-emocoes-basicas.pdf" target="_blank">
-                <aside class="links">[SLIDE]</aside>
-                LBCNN para Reconhecimento de Expressões Faciais de Emoções Básicas (2018)
+                <span class="talk-badge">[SLIDE] 2018</span>
+                <span class="talk-title">LBCNN para Reconhecimento de Express&otilde;es Faciais de Emo&ccedil;&otilde;es B&aacute;sicas</span>
               </a>
             </li>
-
-            <li>
+            <li class="talk-item">
               <a href="https://github.com/whoisraibolt/Convolutional-Neural-Network-MNIST/blob/master/Convolutional-Neural-Network-MNIST.ipynb" target="_blank">
-                <aside class="links">[IWD '19]</aside>
-                Construa sua própria Rede Neural Convolucional em 3, 2, 1...! (2019)
+                <span class="talk-badge">[IWD &apos;19] 2019</span>
+                <span class="talk-title">Construa sua pr&oacute;pria Rede Neural Convolucional em 3, 2, 1...!</span>
               </a>
             </li>
-
-            <li>
+            <li class="talk-item">
               <a href="files/open-source-por-que-eu-devo-comecar-a-contribuir-ja.pdf" target="_blank">
-                <aside class="links">[IWD '19]</aside>
-                Open Source: Por que eu devo começar a contribuir JÁ (2019)
+                <span class="talk-badge">[IWD &apos;19] 2019</span>
+                <span class="talk-title">Open Source: Por que eu devo come&ccedil;ar a contribuir J&Aacute;</span>
               </a>
             </li>
-
-            <li>
+            <li class="talk-item">
               <a href="files/open-source-por-que-eu-devo-comecar-a-contribuir-ja-flisol.pdf" target="_blank">
-                <aside class="links">[FLISOL '19]</aside>
-                Open Source: Por que eu devo começar a contribuir JÁ (2019)
+                <span class="talk-badge">[FLISOL &apos;19] 2019</span>
+                <span class="talk-title">Open Source: Por que eu devo come&ccedil;ar a contribuir J&Aacute;</span>
               </a>
             </li>
-
-	          <li>
+            <li class="talk-item">
               <a href="https://github.com/whoisraibolt/Google-Compute-Engine-Essentials/blob/master/Google%20Compute%20Engine%20Essentials.md" target="_blank">
-                <aside class="links">[GDG PETRÓPOLIS]</aside>
-                Google Compute Engine Essentials (2019)
+                <span class="talk-badge">[GDG PETR&Oacute;POLIS] 2019</span>
+                <span class="talk-title">Google Compute Engine Essentials</span>
               </a>
             </li>
-
-            <li>
+            <li class="talk-item">
               <a href="files/compressao-de-imagem-usando-convolutional-autoencoders.pdf" target="_blank">
-                <aside class="links">[IME]</aside>
-                Compressão de Imagem: usando Convolutional Autoencoders (2019)
+                <span class="talk-badge">[IME] 2019</span>
+                <span class="talk-title">Compress&atilde;o de Imagem: usando Convolutional Autoencoders</span>
               </a>
             </li>
-
-            <li>
+            <li class="talk-item">
               <a href="files/comparative-evaluation-of-feature-descriptors-through-bag-of-visual-features-with-multilayer-perceptron-on-embedded-GPU-system.pdf" target="_blank">
-                <aside class="links">[LARS/SBR '20]</aside>
-                Comparative Evaluation of Feature Descriptors Through Bag of Visual Features with Multilayer Perceptron on Embedded GPU System (2020)
+                <span class="talk-badge">[LARS/SBR &apos;20] 2020</span>
+                <span class="talk-title">Comparative Evaluation of Feature Descriptors Through Bag of Visual Features with Multilayer Perceptron on Embedded GPU System</span>
               </a>
             </li>
-
-            <li>
-              <a href="files/desafios-na-construcao-de-um-sistema-de-navegacao-de-robos-autonomos-moveis-baseado-em-visao-detecção-de-fechamento-de-loop.pdf" target="_blank">
-                <aside class="links">[VI CONFESO]</aside>
-                Desafios na construção de um sistema de navegação de robôs autônomos móveis baseado em visão: Detecção de Fechamento de Loop (2021)
+            <li class="talk-item">
+              <a href="files/desafios-na-construcao-de-um-sistema-de-navegacao-de-robos-autonomos-moveis-baseado-em-visao-detec%C3%A7%C3%A3o-de-fechamento-de-loop.pdf" target="_blank">
+                <span class="talk-badge">[VI CONFESO] 2021</span>
+                <span class="talk-title">Desafios na constru&ccedil;&atilde;o de um sistema de navega&ccedil;&atilde;o de rob&ocirc;s aut&ocirc;nomos m&oacute;veis baseado em vis&atilde;o: Detec&ccedil;&atilde;o de Fechamento de Loop</span>
               </a>
             </li>
-
-            <li>
+            <li class="talk-item">
               <a href="files/DESCNET-rede-neural-convolucional-de-descritores-uma-abordagem-para-o-fechamento-de-loop-em-visual-SLAM.pdf" target="_blank">
-                <aside class="links">[SLIDE]</aside>
-                DescNet — Rede Neural Convolucional de Descritores: uma abordagem para o fechamento de loop em Visual SLAM (2021)
+                <span class="talk-badge">[SLIDE] 2021</span>
+                <span class="talk-title">DescNet &mdash; Rede Neural Convolucional de Descritores: uma abordagem para o fechamento de loop em Visual SLAM</span>
               </a>
             </li>
-
-            <li>
+            <li class="talk-item">
               <a href="files/towards-loop-closure-detection-for-SLAM-applications-using-bag-of-visual-features-experiments-and-simulation.pdf" target="_blank">
-                <aside class="links">[III LAWCN]</aside>
-                Towards Loop Closure Detection for SLAM Applications using Bag of Visual Features: Experiments and Simulation (2021)
+                <span class="talk-badge">[III LAWCN] 2021</span>
+                <span class="talk-title">Towards Loop Closure Detection for SLAM Applications using Bag of Visual Features: Experiments and Simulation</span>
               </a>
             </li>
-
-            <li>
+            <li class="talk-item">
               <a href="https://www.youtube.com/watch?v=78d2wYuvYeU" target="_blank">
-                <aside class="links">[UNIFESO]</aside>
-                Maratona Vestibulando 22.1 - Ciência da Computação (2022)
+                <span class="talk-badge">[UNIFESO] 2022</span>
+                <span class="talk-title">Maratona Vestibulando 22.1 - Ci&ecirc;ncia da Computa&ccedil;&atilde;o</span>
               </a>
             </li>
-
-            <li>
+            <li class="talk-item">
               <a href="files/CCOMP-coding-dojo.pdf" target="_blank">
-                <aside class="links">[UNIFESO]</aside>
-                Coding Dojo como prática educacional em Ciência da Computação no processo de ensino-aprendizagem (2022)
+                <span class="talk-badge">[UNIFESO] 2022</span>
+                <span class="talk-title">Coding Dojo como pr&aacute;tica educacional em Ci&ecirc;ncia da Computa&ccedil;&atilde;o no processo de ensino-aprendizagem</span>
               </a>
             </li>
-
-            <li>
+            <li class="talk-item">
               <a href="https://www.youtube.com/watch?v=1wAfqY7fxL0" target="_blank">
-                <aside class="links">[SERRATEC]</aside>
-                Aula Inaugural | Residência Em TIC/Software do Serratec (2023)
+                <span class="talk-badge">[SERRATEC] 2023</span>
+                <span class="talk-title">Aula Inaugural | Resid&ecirc;ncia Em TIC/Software do Serratec</span>
               </a>
             </li>
-
-            <li>
+            <li class="talk-item">
               <a href="files/divisao-e-conquista-envoltoria-convexa.pdf" target="_blank">
-                <aside class="links">[UNIFESO]</aside>
-                Divisão e Conquista - Envoltória Convexa (2023)
+                <span class="talk-badge">[UNIFESO] 2023</span>
+                <span class="talk-title">Divis&atilde;o e Conquista - Envolt&oacute;ria Convexa</span>
               </a>
             </li>
-
-            <li>
+            <li class="talk-item">
               <a href="files/coding-dojo-api-restful.pdf" target="_blank">
-                <aside class="links">[UNIFESO]</aside>
-                Coding Dojo - API RESTful (2024)
+                <span class="talk-badge">[UNIFESO] 2024</span>
+                <span class="talk-title">Coding Dojo - API RESTful</span>
               </a>
             </li>
-
-            <li>
-              <a href="files/explorando-o-racismo-algorítmico.pdf" target="_blank">
-                <aside class="links">[IV PRETAS ACADÊMICAS]</aside>
-                Explorando o racismo algorítmico através da visão computacional: uma revisão bibliométrica (2024)
+            <li class="talk-item">
+              <a href="files/explorando-o-racismo-algor%C3%ADtmico.pdf" target="_blank">
+                <span class="talk-badge">[IV PRETAS ACAD&Ecirc;MICAS] 2024</span>
+                <span class="talk-title">Explorando o racismo algor&iacute;tmico atrav&eacute;s da vis&atilde;o computacional: uma revis&atilde;o bibliom&eacute;trica</span>
               </a>
             </li>
-
           </ul>
         </div>
       </section>
 
-      <!-- Contact -->
       <section class="contact">
-        <div class="content">
-          <p id="contact"></p>
-
-          <!-- Avatar -->
-          <img src="images/alexandra-raibolt-avatar.png" id="avatar">
-
-          <h3>ALEXANDRA RAIBOLT</h3>
-
-          <div class="details">
-            <p><a href="https://github.com/whoisraibolt" target="_blank">GitHub</a></p>
-	    <p><a href="https://stackoverflow.com/users/8233320/whoisraibolt" target="_blank">StackOverflow</a></p>
-            <p><a href="https://www.linkedin.com/in/whoisraibolt" target="_blank">LinkedIn</a></p>
-	    <p><a href="https://orcid.org/0000-0002-8982-596X" target="_blank">Orcid ID</a></p>
-            <p><a href="http://lattes.cnpq.br/4144500977095845" target="_blank">Lattes</a></p>
-            <p><a href="mailto:alexandra.raibolt@gmail.com" target="_blank">E-mail</a></p>
+        <div class="section-inner" id="contact">
+          <h2 class="section-title">Get in touch</h2>
+          <div class="section-line" aria-hidden="true"></div>
+          <img src="images/alexandra-raibolt-avatar.png" id="avatar" alt="Alexandra Raibolt">
+          <h3 class="contact-name">Alexandra Raibolt</h3>
+          <div class="contact-links">
+            <a href="https://github.com/whoisraibolt" target="_blank" class="contact-link">
+              <span aria-hidden="true">&#x1F419;</span> GitHub
+            </a>
+            <a href="https://stackoverflow.com/users/8233320/whoisraibolt" target="_blank" class="contact-link">
+              <span aria-hidden="true">&#x1F4DA;</span> StackOverflow
+            </a>
+            <a href="https://www.linkedin.com/in/whoisraibolt" target="_blank" class="contact-link">
+              <span aria-hidden="true">&#x1F4BC;</span> LinkedIn
+            </a>
+            <a href="https://orcid.org/0000-0002-8982-596X" target="_blank" class="contact-link">
+              <span aria-hidden="true">&#x1F52C;</span> Orcid ID
+            </a>
+            <a href="http://lattes.cnpq.br/4144500977095845" target="_blank" class="contact-link">
+              <span aria-hidden="true">&#x1F4C4;</span> Lattes
+            </a>
+            <a href="mailto:alexandra.raibolt@gmail.com" class="contact-link">
+              <span aria-hidden="true">&#x2709;&#xFE0F;</span> E-mail
+            </a>
+          </div>
         </div>
       </section>
 
-      <!-- Footer -->
-      <section class="footer">
-        <div class="content">
-        <p>Copyright © 2025 whoisraibolt</p>
-        <br>
-        <p>Alexandra Raibolt</p>
+      <footer class="footer">
+        <div class="footer-inner">
+          <p>Copyright &copy; 2025 whoisraibolt &middot; Alexandra Raibolt</p>
         </div>
-		
-		<a id="top">
-      ⬆
-		</a>
-      </section>
+        <a id="top" aria-label="Scroll to top">&#x2B06;</a>
+      </footer>
 
-        <!-- AnjularJS -->
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
-        <script src="javascript/angular-github-repo.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+      <script src="javascript/angular-github-repo.js"></script>
+      <script>
+        angular.module("repository", ["githubRepo"]);
+      </script>
 
-        <script>
-            angular.module("repository", ["githubRepo"]);
-        </script>
+      <script>
+        (function() {
+          var body = document.body;
+          var btn = document.getElementById("themeToggle");
+          var icon = btn.querySelector("[aria-hidden]");
+          var themeColorMeta = document.querySelector("meta[name='theme-color']");
+          var pending = document.documentElement.getAttribute("data-theme-pending");
+
+          function applyTheme(isLight) {
+            if (isLight) {
+              body.classList.add("light-mode");
+              icon.innerHTML = "&#x2600;&#xFE0F;";
+              if (themeColorMeta) themeColorMeta.setAttribute("content", "#ffffff");
+            } else {
+              body.classList.remove("light-mode");
+              icon.innerHTML = "&#x1F319;";
+              if (themeColorMeta) themeColorMeta.setAttribute("content", "#0d1117");
+            }
+          }
+
+          if (pending === "light") {
+            applyTheme(true);
+            document.documentElement.removeAttribute("data-theme-pending");
+          }
+
+          btn.addEventListener("click", function() {
+            var isLight = !body.classList.contains("light-mode");
+            applyTheme(isLight);
+            localStorage.setItem("theme", isLight ? "light" : "dark");
+          });
+        })();
+      </script>
     </body>
 </html>
