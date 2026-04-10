@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Fundamentos vs. IA: O Dilema da Formação em Programação — Apresentação">
+<title>Fundamentos vs. IA: O Dilema da Formação em Programação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* =====================================================
+   CSS VARIABLES & THEME
+   ===================================================== */
+:root {
+  --bg-dark: #0a0a0f;
+  --bg-card: #12121a;
+  --neon-cyan: #00f5ff;
+  --neon-magenta: #ff00ff;
+  --neon-purple: #b366ff;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0b0;
+  --border-color: #2a2a3a;
+  --success: #00e676;
+  --warning: #ffea00;
+  --danger: #ff1744;
+  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --slide-transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html[data-theme="light"] {
+  --bg-dark: #f5f5f7;
+  --bg-card: #ffffff;
+  --neon-cyan: #0077b6;
+  --neon-magenta: #c2185b;
+  --neon-purple: #7b1fa2;
+  --text-primary: #1a1a2e;
+  --text-secondary: #555570;
+  --border-color: #d0d0dd;
+  --success: #2e7d32;
+  --warning: #f57f17;
+  --danger: #c62828;
+}
+
+/* =====================================================
+   RESET & BASE
+   ===================================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%; overflow: hidden;
+  font-family: 'Space Grotesk', sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-primary);
+}
+
+/* =====================================================
+   GRID BACKGROUND
+   ===================================================== */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0,245,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+html[data-theme="light"] body::before {
+  background-image:
+    linear-gradient(rgba(0,119,182,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,119,182,0.04) 1px, transparent 1px);
+}
+
+/* =====================================================
+   PROGRESS BAR
+   ===================================================== */
+#progress-bar {
+  position: fixed; top: 0; left: 0; z-index: 100;
+  height: 4px; width: 0%;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+  transition: width var(--transition);
+  box-shadow: 0 0 8px var(--neon-cyan);
+}
+
+/* =====================================================
+   CONTROLS (top-right)
+   ===================================================== */
+#controls {
+  position: fixed; top: 16px; right: 16px; z-index: 200;
+  display: flex; gap: 8px; align-items: center;
+}
+
+#controls button {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+#controls button:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 10px rgba(0,245,255,0.3);
+  transform: translateY(-2px);
+}
+
+/* =====================================================
+   SLIDE COUNTER (bottom-right)
+   ===================================================== */
+#slide-counter {
+  position: fixed; bottom: 20px; right: 24px; z-index: 200;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+/* NAV ARROWS */
+#nav-prev, #nav-next {
+  position: fixed; top: 50%; z-index: 200;
+  transform: translateY(-50%);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--transition);
+  opacity: 0.6;
+}
+#nav-prev { left: 12px; }
+#nav-next { right: 12px; }
+#nav-prev:hover, #nav-next:hover {
+  opacity: 1;
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 12px rgba(0,245,255,0.3);
+}
+
+/* =====================================================
+   SLIDE VIEWPORT
+   ===================================================== */
+#slides-container {
+  position: relative; width: 100vw; height: 100vh; overflow: hidden;
+  z-index: 1;
+}
+
+.slide {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  padding: 60px 80px 60px 80px;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity var(--slide-transition), transform var(--slide-transition);
+  pointer-events: none;
+  overflow-y: auto;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: all;
+}
+
+.slide.prev {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+/* =====================================================
+   TYPOGRAPHY HELPERS
+   ===================================================== */
+.gradient-text {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.slide-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  margin-bottom: 0.6em;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.slide-subtitle {
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 0.4em;
+}
+
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--neon-cyan);
+  padding: 3px 10px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+/* =====================================================
+   CARD COMPONENT
+   ===================================================== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 20px 24px;
+  transition: all var(--transition);
+}
+
+.card:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 20px rgba(0,245,255,0.15);
+  transform: translateY(-3px);
+}
+
+.card-accent-cyan  { border-left: 3px solid var(--neon-cyan); }
+.card-accent-magenta { border-left: 3px solid var(--neon-magenta); }
+.card-accent-purple  { border-left: 3px solid var(--neon-purple); }
+.card-accent-success { border-left: 3px solid var(--success); }
+.card-accent-danger  { border-left: 3px solid var(--danger); }
+
+.card h3 {
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  color: var(--neon-cyan);
+}
+.card-accent-magenta h3 { color: var(--neon-magenta); }
+.card-accent-purple  h3 { color: var(--neon-purple); }
+.card-accent-success h3 { color: var(--success); }
+.card-accent-danger  h3 { color: var(--danger); }
+
+/* =====================================================
+   GRID LAYOUTS
+   ===================================================== */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; width: 100%; }
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; width: 100%; }
+
+/* =====================================================
+   LISTS
+   ===================================================== */
+ul.styled, ol.styled {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+ul.styled li, ol.styled li {
+  padding: 6px 0 6px 24px;
+  position: relative;
+  font-size: clamp(0.82rem, 1.4vw, 1rem);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+ul.styled li::before {
+  content: '▸';
+  position: absolute; left: 0;
+  color: var(--neon-cyan);
+}
+
+ol.styled { counter-reset: item; }
+ol.styled li { counter-increment: item; }
+ol.styled li::before {
+  content: counter(item) '.';
+  position: absolute; left: 0;
+  color: var(--neon-cyan);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8em;
+}
+
+li strong { color: var(--text-primary); }
+
+/* =====================================================
+   BLOCKQUOTE
+   ===================================================== */
+blockquote {
+  border-left: 3px solid var(--neon-magenta);
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border-radius: 0 12px 12px 0;
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: clamp(0.85rem, 1.4vw, 1rem);
+  width: 100%;
+  margin: 8px 0;
+}
+
+blockquote strong { color: var(--neon-magenta); }
+
+/* =====================================================
+   TABLE
+   ===================================================== */
+.table-wrap { width: 100%; overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+}
+
+th {
+  background: var(--bg-card);
+  color: var(--neon-cyan);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 2px solid var(--neon-cyan);
+}
+
+td {
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(0,245,255,0.04); }
+
+/* =====================================================
+   CODE / MONO
+   ===================================================== */
+code {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.85em;
+  color: var(--neon-cyan);
+}
+
+.formula {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(1rem, 2.2vw, 1.5rem);
+  font-weight: 600;
+  text-align: center;
+  padding: 14px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--neon-purple);
+  border-radius: 12px;
+  color: var(--neon-purple);
+  margin: 8px 0;
+  width: 100%;
+}
+
+/* =====================================================
+   HIGHLIGHT BOX
+   ===================================================== */
+.highlight-box {
+  background: linear-gradient(135deg, rgba(0,245,255,0.08), rgba(255,0,255,0.08));
+  border: 1px solid var(--neon-cyan);
+  border-radius: 16px;
+  padding: 18px 24px;
+  text-align: center;
+  width: 100%;
+}
+
+.highlight-box p {
+  font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+/* =====================================================
+   FLOW CHAIN (slide 6)
+   ===================================================== */
+.flow-chain {
+  display: flex; flex-direction: column; gap: 6px;
+  width: 100%; max-width: 620px;
+}
+
+.flow-item {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: clamp(0.8rem, 1.3vw, 0.95rem);
+  color: var(--text-secondary);
+}
+
+.flow-item .step-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: var(--neon-cyan);
+  min-width: 24px;
+}
+
+.flow-arrow {
+  text-align: center;
+  color: var(--neon-magenta);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* =====================================================
+   TIMELINE (slide 9)
+   ===================================================== */
+.timeline { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+
+.timeline-phase {
+  display: flex; gap: 16px; align-items: flex-start;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.phase-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  align-self: center;
+  min-width: 100px;
+  text-align: center;
+}
+
+.phase-label.success { background: rgba(0,230,118,0.15); color: var(--success); border: 1px solid var(--success); }
+.phase-label.danger  { background: rgba(255,23,68,0.15);  color: var(--danger);  border: 1px solid var(--danger); }
+.phase-label.warning { background: rgba(255,234,0,0.15);  color: var(--warning); border: 1px solid var(--warning); }
+
+.phase-content { font-size: clamp(0.78rem, 1.3vw, 0.92rem); color: var(--text-secondary); line-height: 1.5; }
+.phase-content strong { color: var(--text-primary); }
+
+/* =====================================================
+   BIG QUOTE (slide 19)
+   ===================================================== */
+.big-quote {
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.3;
+  padding: 20px;
+}
+
+/* =====================================================
+   PILLARS (slide 19)
+   ===================================================== */
+.pillar-row {
+  display: flex; gap: 12px; width: 100%;
+}
+
+.pillar {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  font-size: clamp(0.78rem, 1.3vw, 0.9rem);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.pillar.highlight { border-color: var(--neon-purple); color: var(--neon-purple); font-weight: 600; }
+
+/* =====================================================
+   COVER SLIDE
+   ===================================================== */
+.cover-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--neon-purple);
+  border: 1px solid var(--neon-purple);
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.cover-title {
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.cover-subtitle {
+  font-size: clamp(1rem, 2.2vw, 1.6rem);
+  color: var(--neon-magenta);
+  text-align: center;
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+.cover-author {
+  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.7;
+}
+
+.cover-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-top: 12px;
+}
+
+/* =====================================================
+   SLIDE-SPECIFIC HELPERS
+   ===================================================== */
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--neon-cyan);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+
+.col-title-cyan    { color: var(--neon-cyan);    font-weight: 600; font-size: clamp(0.82rem, 1.4vw, 1rem); margin-bottom: 8px; }
+.col-title-magenta { color: var(--neon-magenta); font-weight: 600; font-size: clamp(0.82rem, 1.4vw, 1rem); margin-bottom: 8px; }
+.col-title-purple  { color: var(--neon-purple);  font-weight: 600; font-size: clamp(0.82rem, 1.4vw, 1rem); margin-bottom: 8px; }
+
+.ironic {
+  font-style: italic;
+  color: var(--neon-magenta);
+  font-size: clamp(0.78rem, 1.3vw, 0.9rem);
+  text-align: center;
+  margin-top: 4px;
+}
+
+.kpi-row {
+  display: flex; gap: 12px; width: 100%; flex-wrap: wrap;
+}
+
+.kpi {
+  flex: 1; min-width: 130px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 12px 16px;
+  text-align: center;
+}
+
+.kpi .kpi-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(1rem, 2vw, 1.6rem);
+  font-weight: 700;
+  display: block;
+}
+
+.kpi .kpi-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* =====================================================
+   REFERENCE LIST
+   ===================================================== */
+.ref-list { width: 100%; }
+
+.ref-list a {
+  color: var(--neon-cyan);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.ref-list a:hover { color: var(--neon-magenta); text-decoration: underline; }
+
+/* =====================================================
+   PRINT
+   ===================================================== */
+@media print {
+  #progress-bar, #controls, #slide-counter, #nav-prev, #nav-next { display: none !important; }
+  body { overflow: visible !important; background: white; }
+  html, body { height: auto; }
+  #slides-container { position: static; height: auto; overflow: visible; }
+
+  .slide {
+    position: relative !important;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: all !important;
+    height: auto;
+    min-height: 100vh;
+    page-break-after: always;
+    break-after: page;
+    padding: 40px 60px;
+    overflow: visible;
+  }
+
+  .card:hover { transform: none; box-shadow: none; }
+  body::before { display: none; }
+
+  * { color: #1a1a2e !important; background: white !important;
+      border-color: #d0d0dd !important; box-shadow: none !important; }
+  .gradient-text { -webkit-text-fill-color: #1a1a2e !important; }
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 768px) {
+  .slide { padding: 50px 20px 50px 20px; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .pillar-row { flex-direction: column; }
+  .kpi-row { flex-direction: column; }
+  #nav-prev, #nav-next { display: none; }
+}
+
+@media (max-width: 480px) {
+  .slide { padding: 44px 12px 44px 12px; }
+  .table-wrap { font-size: 0.72rem; }
+}
+
+/* Content width constraint */
+.slide > * { max-width: 1100px; width: 100%; }
+.slide > .slide-title, .slide > .slide-subtitle, .slide > .section-label { width: auto; }
+.slide-inner { width: 100%; max-width: 1100px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Controls -->
+<div id="controls">
+  <button id="btn-theme" title="Alternar tema">🌙 Tema</button>
+  <button id="btn-fullscreen" title="Tela cheia">⛶ Full</button>
+</div>
+
+<!-- Slide Counter -->
+<div id="slide-counter">1 / 20</div>
+
+<!-- Navigation Arrows -->
+<button id="nav-prev" aria-label="Slide anterior">&#8592;</button>
+<button id="nav-next" aria-label="Próximo slide">&#8594;</button>
+
+<!-- =====================================================
+     SLIDES CONTAINER
+     ===================================================== -->
+<div id="slides-container">
+
+  <!-- ===== SLIDE 1: CAPA ===== -->
+  <section class="slide active" data-slide="1">
+    <div class="slide-inner" style="align-items:center; text-align:center;">
+      <div class="cover-badge">Palestra · 2026</div>
+      <h1 class="cover-title gradient-text">Fundamentos vs. IA:<br>O Dilema da Formação<br>em Programação</h1>
+      <p class="cover-subtitle">"Surfando a onda sem perder o chão"</p>
+      <p class="cover-author">
+        Professora de Ciência da Computação, IA e<br>
+        Análise e Desenvolvimento de Sistemas<br>
+        <strong>Especialista em Robótica e IA</strong>
+      </p>
+      <div class="cover-meta">[Data] &nbsp;•&nbsp; [Instituição]</div>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 2: O CONTEXTO ===== -->
+  <section class="slide" data-slide="2">
+    <div class="slide-inner">
+      <p class="section-label">Contexto</p>
+      <h2 class="slide-title gradient-text">A Discussão que Não Podemos Ignorar</h2>
+      <div class="card card-accent-magenta" style="margin-bottom:8px;">
+        <p style="font-size:clamp(0.9rem,1.6vw,1.1rem); font-style:italic; color:var(--text-primary);">
+          "Vocês viram aquele vídeo do Lucas Montano dizendo que não quer mais voltar a codar?"
+        </p>
+      </div>
+      <ul class="styled">
+        <li>Um influenciador sênior afirma: <strong>"Nunca fui tão produtivo"</strong></li>
+        <li>A mensagem é clara: IA gera <strong>10x mais produtividade</strong></li>
+        <li>Mas qual é o <strong>custo</strong> dessa produtividade?</li>
+        <li>E o que isso significa para quem está <strong>começando?</strong></li>
+      </ul>
+      <blockquote>
+        "Imagina um aluno vendo isso e pensando: <strong>'Por que vou estudar algoritmos se a IA faz tudo?'</strong>"
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 3: A REALIDADE DO MERCADO ===== -->
+  <section class="slide" data-slide="3">
+    <div class="slide-inner">
+      <p class="section-label">Mercado</p>
+      <h2 class="slide-title gradient-text">O Jogo Mudou</h2>
+      <div class="grid-2">
+        <div class="card card-accent-cyan">
+          <h3>Antes</h3>
+          <ul class="styled">
+            <li>Qual linguagem aprender?</li>
+            <li>Qual framework dominar?</li>
+            <li>Qual stack escolher?</li>
+          </ul>
+        </div>
+        <div class="card card-accent-magenta">
+          <h3>Agora</h3>
+          <ul class="styled">
+            <li>Você vai resistir ou <strong>surfar a onda?</strong></li>
+            <li>Produtividade vs. Conhecimento?</li>
+            <li>IA como <strong>ferramenta</strong> ou substituto?</li>
+          </ul>
+        </div>
+      </div>
+      <div class="kpi-row" style="margin-top:8px;">
+        <div class="kpi">
+          <span class="kpi-val gradient-text">10x</span>
+          <div class="kpi-label">Produtividade exigida</div>
+        </div>
+        <div class="kpi">
+          <span class="kpi-val" style="color:var(--neon-cyan);">Sênior+IA</span>
+          <div class="kpi-label">Bate júnior sem IA</div>
+        </div>
+        <div class="kpi">
+          <span class="kpi-val" style="color:var(--danger);">▼</span>
+          <div class="kpi-label">Vagas para iniciantes</div>
+        </div>
+        <div class="kpi">
+          <span class="kpi-val" style="color:var(--success);">▲</span>
+          <div class="kpi-label">Demanda por sêniors</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 4: OS DOIS LADOS ===== -->
+  <section class="slide" data-slide="4">
+    <div class="slide-inner">
+      <p class="section-label">Perspectivas</p>
+      <h2 class="slide-title gradient-text">Os Dois Lados da Moeda</h2>
+      <div class="grid-2">
+        <div class="card card-accent-cyan">
+          <h3>🚀 Lado 1: "Jogue o Jogo" (Os Otimistas)</h3>
+          <ul class="styled">
+            <li>IA aumenta produtividade exponencialmente</li>
+            <li>Código é <strong>commodity</strong> em alguns contextos</li>
+            <li>O importante é <strong>resolver problemas</strong>, não escrever linhas</li>
+          </ul>
+          <blockquote style="margin-top:8px;">"O que importa é resolver o problema com alguma ferramenta."</blockquote>
+        </div>
+        <div class="card card-accent-magenta">
+          <h3>⚠️ Lado 2: "Não Abandone os Fundamentos" (Os Realistas)</h3>
+          <ul class="styled">
+            <li>Sem base, você só <strong>"aperta botões"</strong></li>
+            <li>IA gera código com <strong>vulnerabilidades</strong></li>
+            <li>Você não consegue <strong>debugar</strong> o que não entende</li>
+          </ul>
+          <blockquote style="margin-top:8px;">"Para ser produtivo com IA, você precisa saber escrever código para debugar."</blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 5: O PONTO DE EQUILÍBRIO ===== -->
+  <section class="slide" data-slide="5">
+    <div class="slide-inner">
+      <p class="section-label">Equilíbrio</p>
+      <h2 class="slide-title gradient-text">A Verdade Incômoda</h2>
+      <div class="highlight-box" style="margin-bottom:10px;">
+        <p style="font-size:clamp(1rem,2vw,1.3rem); font-weight:600;">Ambos estão certos. E ambos estão incompletos.</p>
+      </div>
+      <div class="formula">Produtividade_real = Fundamentos × IA</div>
+      <div class="grid-2" style="margin-top:4px;">
+        <div class="card card-accent-danger">
+          <p style="font-family:'JetBrains Mono',monospace; color:var(--danger); font-size:clamp(0.82rem,1.4vw,1rem);">
+            Sem fundamentos:<br><strong>IA × 0 = 0</strong><br><span style="color:var(--text-secondary); font-size:0.85em;">(ou pior, gera problemas)</span>
+          </p>
+        </div>
+        <div class="card card-accent-success">
+          <p style="font-family:'JetBrains Mono',monospace; color:var(--success); font-size:clamp(0.82rem,1.4vw,1rem);">
+            Com fundamentos:<br><strong>IA × 10 = Excelência</strong>
+          </p>
+        </div>
+      </div>
+      <ul class="styled">
+        <li>Um sênior com 20 anos <strong>NÃO precisa</strong> escrever cada linha</li>
+        <li>Um júnior que não escreve código <strong>NÃO vai aprender</strong></li>
+        <li>O jogo mudou, mas as <strong>regras básicas não</strong></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 6: O DILEMA DOS INICIANTES ===== -->
+  <section class="slide" data-slide="6">
+    <div class="slide-inner">
+      <p class="section-label">Iniciantes</p>
+      <h2 class="slide-title gradient-text">O Dilema dos Iniciantes</h2>
+      <div style="display:flex; gap:24px; width:100%; align-items:flex-start; flex-wrap:wrap;">
+        <div class="flow-chain" style="flex:1; min-width:260px;">
+          <div class="flow-item"><span class="step-num">1</span>Aluno vê influencer dizendo "não quero mais codar"</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-item"><span class="step-num">2</span>Pensa: "Então por que vou estudar?"</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-item"><span class="step-num">3</span>Começa a usar IA sem entender nada</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-item"><span class="step-num">4</span>Gera código que não funciona</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-item"><span class="step-num">5</span>Não consegue debugar</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-item"><span class="step-num">6</span>Desiste ou fica preso em trabalhos simples</div>
+        </div>
+        <div class="card card-accent-danger" style="flex:1; min-width:220px;">
+          <h3>Resultado</h3>
+          <ul class="styled">
+            <li>Menos vagas para estágio e júnior</li>
+            <li>Mais demanda para sênior</li>
+            <li><strong>Ciclo de escassez de talentos</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 7: QUANDO USAR IA ===== -->
+  <section class="slide" data-slide="7">
+    <div class="slide-inner">
+      <p class="section-label">Boas Práticas</p>
+      <h2 class="slide-title gradient-text">Casos de Uso: Quando Usar IA? Quando Não Usar?</h2>
+      <div class="grid-2">
+        <div class="card card-accent-success">
+          <h3>✅ Use IA para</h3>
+          <ul class="styled">
+            <li>Boilerplate e código repetitivo</li>
+            <li>Testes unitários</li>
+            <li>Documentação</li>
+            <li>Refatoração</li>
+            <li>Acelerar prototipagem</li>
+          </ul>
+        </div>
+        <div class="card card-accent-danger">
+          <h3>❌ NÃO use IA para</h3>
+          <ul class="styled">
+            <li>Aprender conceitos fundamentais</li>
+            <li>Entender lógica de negócio</li>
+            <li>Decisões de arquitetura críticas</li>
+            <li>Segurança e compliance</li>
+            <li>Quando você não entende o resultado</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 8: CASO 1 — YURIRDEV ===== -->
+  <section class="slide" data-slide="8">
+    <div class="slide-inner">
+      <p class="section-label">Caso Prático 1</p>
+      <h2 class="slide-title gradient-text">1 Hacker vs 4 Vibecoders: O Que Realmente Importa</h2>
+      <p style="font-size:clamp(0.8rem,1.3vw,0.95rem); color:var(--text-secondary); text-align:center; margin-bottom:8px;">
+        4 sistemas, zero linhas de código escritas na mão, 1 hacker profissional testando cada um.
+      </p>
+      <div class="grid-4" style="grid-template-columns:repeat(2,1fr);">
+        <div class="card card-accent-danger">
+          <h3>🔴 Júnior — Prompts Aleatórios</h3>
+          <p style="font-size:clamp(0.76rem,1.2vw,0.88rem); color:var(--text-secondary);">Race condition em transações financeiras. <strong>Gerava dinheiro do nada.</strong></p>
+        </div>
+        <div class="card" style="border-left:3px solid var(--warning);">
+          <h3 style="color:var(--warning);">🟡 Pleno — Mencionou Segurança Tarde</h3>
+          <p style="font-size:clamp(0.76rem,1.2vw,0.88rem); color:var(--text-secondary);">1 vulnerabilidade. <strong>Commitou secrets no código.</strong></p>
+        </div>
+        <div class="card card-accent-success">
+          <h3>🟢 Sênior — TDD Estruturado</h3>
+          <p style="font-size:clamp(0.76rem,1.2vw,0.88rem); color:var(--text-secondary);"><strong>ZERO vulnerabilidades.</strong> Framework + TDD + etapas pequenas.</p>
+        </div>
+        <div class="card card-accent-purple">
+          <h3>🟣 Especialista em Segurança</h3>
+          <p style="font-size:clamp(0.76rem,1.2vw,0.88rem); color:var(--text-secondary);"><strong>Praticamente zero.</strong> Usou IA para atacar o próprio sistema antes do hacker.</p>
+        </div>
+      </div>
+      <blockquote>
+        <strong>"IA amplifica o que você já sabe. Inclusive o que você não sabe."</strong>
+      </blockquote>
+      <p style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--text-secondary);">
+        Ref: YuriRDev — "1 Hacker vs 4 Vibecoders" (YouTube)
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 9: CASO 2 — YOUTUBER SAAS ===== -->
+  <section class="slide" data-slide="9">
+    <div class="slide-inner">
+      <p class="section-label">Caso Prático 2</p>
+      <h2 class="slide-title gradient-text">200k em 50 Dias: A História de um Desastre Anunciado</h2>
+      <div class="timeline">
+        <div class="timeline-phase">
+          <span class="phase-label success">Fase 1 · Sucesso</span>
+          <div class="phase-content">Criou SaaS em 50 dias → Faturou <strong>200k</strong> → Se gabou nas redes</div>
+        </div>
+        <div class="timeline-phase">
+          <span class="phase-label danger">Fase 2 · Desastre</span>
+          <div class="phase-content">Commitou <strong>.env no GitHub</strong> → Expôs credenciais de TODOS os clientes → Dados sensíveis públicos</div>
+        </div>
+        <div class="timeline-phase">
+          <span class="phase-label warning">Fase 3 · Consequências</span>
+          <div class="phase-content">Múltiplos processos → Danos reputacionais → Possível falência</div>
+        </div>
+      </div>
+      <p class="ironic">"Ele deve ter esquecido de dizer no prompt pra não cometer erros e ser 100% seguro"</p>
+      <div class="card card-accent-danger" style="margin-top:6px;">
+        <p style="font-size:clamp(0.78rem,1.3vw,0.9rem); color:var(--text-secondary);">
+          <strong>Outro caso:</strong> YouTuber em live — IA criou um <code>ENDPOINT</code> só pra consultar o <code>.env</code>
+        </p>
+      </div>
+      <p style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--text-secondary);">Ref: Reddit r/farialimabets</p>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 10: COMPARAÇÃO DOS CASOS ===== -->
+  <section class="slide" data-slide="10">
+    <div class="slide-inner">
+      <p class="section-label">Análise</p>
+      <h2 class="slide-title gradient-text">O Padrão que Emerge</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Aspecto</th>
+              <th>Caso 1 (YuriRDev)</th>
+              <th>Caso 2 (YouTuber)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Contexto</td><td>Teste controlado</td><td>Produção real</td></tr>
+            <tr><td>Objetivo</td><td>Entender segurança</td><td>Ganhar dinheiro</td></tr>
+            <tr><td>Variável crítica</td><td>Conhecimento prévio</td><td>Falta de conhecimento</td></tr>
+            <tr><td>Vulnerabilidades</td><td>0 (sênior) a ∞ (júnior)</td><td>Múltiplas críticas</td></tr>
+            <tr><td>Consequência</td><td>Aprendizado</td><td>Processos judiciais</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="formula" style="margin-top:10px;">Resultado = Conhecimento × IA</div>
+      <div class="grid-2" style="margin-top:4px;">
+        <div class="card card-accent-danger">
+          <p style="font-family:'JetBrains Mono',monospace; color:var(--danger); font-size:clamp(0.82rem,1.4vw,1rem);">
+            Conhecimento = 0 → Resultado = 0 (ou pior)
+          </p>
+        </div>
+        <div class="card card-accent-success">
+          <p style="font-family:'JetBrains Mono',monospace; color:var(--success); font-size:clamp(0.82rem,1.4vw,1rem);">
+            Conhecimento = 10 → Resultado = 10 × IA = Excelência
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 11: A VERDADE SOBRE PRODUTIVIDADE ===== -->
+  <section class="slide" data-slide="11">
+    <div class="slide-inner">
+      <p class="section-label">Produtividade</p>
+      <h2 class="slide-title gradient-text">A Verdade sobre Produtividade</h2>
+      <div class="card card-accent-magenta" style="margin-bottom:10px;">
+        <p style="color:var(--neon-magenta); font-weight:600; font-size:clamp(0.9rem,1.6vw,1.1rem);">
+          Mito: <strong>"IA = 10x mais rápido"</strong>
+        </p>
+      </div>
+      <div class="card" style="width:100%;">
+        <ul class="styled">
+          <li>Um júnior com IA pode ser mais rápido que um sênior sem IA? <strong>Sim.</strong></li>
+          <li>Mas o código dele é melhor? <strong>Provavelmente não.</strong></li>
+          <li>Ele consegue manter? <strong>Talvez não.</strong></li>
+          <li>Ele consegue evoluir? <strong>Dificilmente.</strong></li>
+        </ul>
+      </div>
+      <blockquote style="margin-top:10px;">
+        <strong>"10x de código ruim é ainda código ruim."</strong>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 12: OS RISCOS REAIS ===== -->
+  <section class="slide" data-slide="12">
+    <div class="slide-inner">
+      <p class="section-label">Riscos</p>
+      <h2 class="slide-title gradient-text">Os Riscos Reais</h2>
+      <div class="grid-3">
+        <div class="card card-accent-danger">
+          <h3>🔒 Segurança</h3>
+          <ul class="styled">
+            <li>Código sem revisão = vulnerabilidades</li>
+            <li>Vazamentos aumentaram <strong>300% em 2024</strong></li>
+            <li>IA gera código com brechas</li>
+          </ul>
+        </div>
+        <div class="card card-accent-magenta">
+          <h3>💼 Profissional</h3>
+          <ul class="styled">
+            <li>Dependência de ferramentas</li>
+            <li>Falta de compreensão</li>
+            <li>Impossibilidade de inovar</li>
+            <li>Substituibilidade</li>
+          </ul>
+        </div>
+        <div class="card card-accent-purple">
+          <h3>🎓 Educacional</h3>
+          <ul class="styled">
+            <li>Alunos não aprendem a pensar</li>
+            <li>Não desenvolvem senso crítico</li>
+            <li>Não resolvem problemas novos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 13: PREGUIÇA PRODUTIVA ===== -->
+  <section class="slide" data-slide="13">
+    <div class="slide-inner">
+      <p class="section-label">Mentalidade</p>
+      <h2 class="slide-title gradient-text">Preguiça Produtiva vs. Preguiça Improdutiva</h2>
+      <div class="grid-2">
+        <div class="card card-accent-success">
+          <h3>✅ Preguiça Produtiva (boa)</h3>
+          <ul class="styled">
+            <li>Automatizar tarefas repetitivas</li>
+            <li>Usar ferramentas para poupar tempo</li>
+            <li>Focar no que realmente importa</li>
+          </ul>
+        </div>
+        <div class="card card-accent-danger">
+          <h3>❌ Preguiça Improdutiva (ruim)</h3>
+          <ul class="styled">
+            <li>Não aprender porque "IA faz"</li>
+            <li>Usar IA sem entender</li>
+            <li>Aceitar código sem questionar</li>
+          </ul>
+        </div>
+      </div>
+      <blockquote>
+        "O mundo evoluiu porque os preguiçosos automatizaram tarefas. <strong>Mas eles entendiam o que estavam automatizando.</strong>"
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 14: SÊNIOR VS JÚNIOR ===== -->
+  <section class="slide" data-slide="14">
+    <div class="slide-inner">
+      <p class="section-label">Papéis</p>
+      <h2 class="slide-title gradient-text">O Papel do Sênior vs. Júnior</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Aspecto</th>
+              <th>Sênior</th>
+              <th>Júnior</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Usa IA?</td><td>Sim, intensamente</td><td>Sim, mas com cuidado</td></tr>
+            <tr><td>Escreve código?</td><td>Menos, mas quando precisa</td><td>Muito, é essencial</td></tr>
+            <tr><td>Foco</td><td>Arquitetura, decisões</td><td>Aprendizado, fundamentos</td></tr>
+            <tr><td>Com IA</td><td>Multiplica expertise</td><td>Pode mascarar falta de conhecimento</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 15: RECOMENDAÇÕES INICIANTES ===== -->
+  <section class="slide" data-slide="15">
+    <div class="slide-inner">
+      <p class="section-label">Recomendações</p>
+      <h2 class="slide-title gradient-text">Recomendações para Iniciantes</h2>
+      <div class="grid-2">
+        <div class="card card-accent-cyan">
+          <h3>📚 1. Estude a base (não negocie isso)</h3>
+          <ul class="styled">
+            <li>Lógica de programação</li>
+            <li>Estruturas de dados</li>
+            <li>Algoritmos</li>
+          </ul>
+        </div>
+        <div class="card card-accent-purple">
+          <h3>⌨️ 2. Pratique escrevendo código</h3>
+          <ul class="styled">
+            <li>Sem IA ou com IA como referência</li>
+            <li>Projetos pessoais</li>
+          </ul>
+        </div>
+        <div class="card card-accent-danger">
+          <h3>🔒 3. Aprenda segurança desde o início</h3>
+          <ul class="styled">
+            <li>Vulnerabilidades comuns</li>
+            <li>Boas práticas</li>
+          </ul>
+        </div>
+        <div class="card card-accent-success">
+          <h3>🤖 4. Use IA como auxiliar, não substituto</h3>
+          <ul class="styled">
+            <li>Para entender conceitos</li>
+            <li>Para revisar código</li>
+            <li>Nunca para substituir aprendizado</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 16: RECOMENDAÇÕES SÊNIORS ===== -->
+  <section class="slide" data-slide="16">
+    <div class="slide-inner">
+      <p class="section-label">Recomendações</p>
+      <h2 class="slide-title gradient-text">Recomendações para Sêniors</h2>
+      <div class="grid-2">
+        <div class="card card-accent-cyan">
+          <h3>🏗️ 1. Foque em arquitetura e design</h3>
+          <p style="font-size:clamp(0.78rem,1.3vw,0.9rem); color:var(--text-secondary); margin-top:6px;">
+            IA não substitui decisões estratégicas.
+          </p>
+        </div>
+        <div class="card card-accent-purple">
+          <h3>⚡ 2. Use IA para produtividade</h3>
+          <ul class="styled">
+            <li>Boilerplate, Testes, Documentação</li>
+            <li><strong>Mas revise tudo</strong></li>
+          </ul>
+        </div>
+        <div class="card card-accent-success">
+          <h3>👥 3. Mentore iniciantes corretamente</h3>
+          <p style="font-size:clamp(0.78rem,1.3vw,0.9rem); color:var(--text-secondary); margin-top:6px;">
+            Mostre como usar IA responsavelmente.
+          </p>
+        </div>
+        <div class="card card-accent-magenta">
+          <h3>📖 4. Fique atualizado</h3>
+          <p style="font-size:clamp(0.78rem,1.3vw,0.9rem); color:var(--text-secondary); margin-top:6px;">
+            IA evolui rápido, novas vulnerabilidades surgem.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 17: CENÁRIOS FUTUROS ===== -->
+  <section class="slide" data-slide="17">
+    <div class="slide-inner">
+      <p class="section-label">Futuro</p>
+      <h2 class="slide-title gradient-text">O Futuro — Cenários Possíveis</h2>
+      <div class="grid-3">
+        <div class="card card-accent-danger">
+          <h3>🔴 Cenário 1: "Apocalipse do Júnior"</h3>
+          <ul class="styled">
+            <li>Vagas desaparecem</li>
+            <li>Falta de renovação</li>
+            <li>Mercado colapsa em <strong>5-10 anos</strong></li>
+          </ul>
+        </div>
+        <div class="card card-accent-success" style="border:2px solid var(--neon-cyan);">
+          <h3>🟢 Cenário 2: "Dois Mundos"</h3>
+          <ul class="styled">
+            <li>Sêniors com IA produzem</li>
+            <li>Júniors estudam fundamentos</li>
+            <li>Mercado se estabiliza</li>
+          </ul>
+        </div>
+        <div class="card card-accent-purple">
+          <h3>🟣 Cenário 3: "Revolução"</h3>
+          <ul class="styled">
+            <li>IA tão boa que código é irrelevante</li>
+            <li>Profissão muda completamente</li>
+          </ul>
+        </div>
+      </div>
+      <div class="highlight-box" style="margin-top:12px;">
+        <p>
+          Mais provável: <strong>Cenário 2</strong>, mas com <strong>transição difícil</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 18: O QUE FAZER AGORA ===== -->
+  <section class="slide" data-slide="18">
+    <div class="slide-inner">
+      <p class="section-label">Ação</p>
+      <h2 class="slide-title gradient-text">O Que Você Deve Fazer AGORA</h2>
+      <div class="grid-3">
+        <div class="card card-accent-cyan">
+          <h3>🎓 Se você é aluno / iniciante</h3>
+          <ul class="styled">
+            <li>✅ Estude algoritmos</li>
+            <li>✅ Escreva muito código</li>
+            <li>✅ Use IA para aprender</li>
+            <li>❌ Não dependa de IA</li>
+          </ul>
+        </div>
+        <div class="card card-accent-purple">
+          <h3>💻 Se você é profissional</h3>
+          <ul class="styled">
+            <li>✅ Aprenda a usar IA</li>
+            <li>✅ Mantenha fundamentos</li>
+            <li>✅ Foque em problemas</li>
+            <li>❌ Não abandone aprendizado</li>
+          </ul>
+        </div>
+        <div class="card card-accent-magenta">
+          <h3>📋 Se você é educador</h3>
+          <ul class="styled">
+            <li>✅ Ensine fundamentos com rigor</li>
+            <li>✅ Mostre IA responsável</li>
+            <li>✅ Prepare para o futuro</li>
+            <li>❌ Não caia no hype</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 19: A CITAÇÃO FINAL ===== -->
+  <section class="slide" data-slide="19">
+    <div class="slide-inner" style="align-items:center; text-align:center;">
+      <p class="section-label">Conclusão</p>
+      <h2 class="slide-title gradient-text">A Citação que Resume Tudo</h2>
+      <div class="big-quote gradient-text">
+        "Não deixe de estudar a base,<br>mas jogue o jogo."
+      </div>
+      <div class="pillar-row" style="margin-top:10px;">
+        <div class="pillar">Quem só estuda base<br>fica para trás</div>
+        <div class="pillar">Quem só usa IA sem base<br>não vai longe</div>
+        <div class="pillar highlight">Quem faz ambos<br><strong>domina o mercado</strong></div>
+      </div>
+      <div class="highlight-box" style="margin-top:14px;">
+        <p>
+          O futuro não é <strong>IA vs. Programador</strong>.<br>
+          É <strong>Programador com IA</strong> vs. <strong>Programador sem IA</strong>.<br>
+          <span style="color:var(--neon-cyan); font-weight:700;">Escolha seu lado.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SLIDE 20: REFERÊNCIAS E CONTATO ===== -->
+  <section class="slide" data-slide="20">
+    <div class="slide-inner">
+      <p class="section-label">Referências</p>
+      <h2 class="slide-title gradient-text">Referências e Contato</h2>
+      <div class="grid-2">
+        <div class="card card-accent-cyan">
+          <h3>📎 Referências</h3>
+          <ul class="styled ref-list">
+            <li><a href="https://www.youtube.com/watch?v=4DzMbBYXa7M" target="_blank" rel="noopener">YuriRDev — "1 Hacker vs 4 Vibecoders" (YouTube)</a></li>
+            <li>Lucas Montano — "Anthropic vazou 9 Modelos..."</li>
+            <li>Lucas Pedro — "A NOVA ONDA DA PROGRAMAÇÃO"</li>
+            <li>LinkedIn — Discussão sobre IA e produtividade</li>
+            <li>Reddit r/farialimabets — Caso do YouTuber SaaS</li>
+          </ul>
+        </div>
+        <div class="card card-accent-purple">
+          <h3>📚 Leitura Recomendada</h3>
+          <ul class="styled">
+            <li>CLRS — <em>Introduction to Algorithms</em></li>
+            <li>Clean Code — Robert C. Martin</li>
+            <li>System Design Interview — Alex Xu</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card card-accent-magenta" style="margin-top:8px;">
+        <h3>📬 Contato</h3>
+        <p style="font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:var(--text-secondary);">
+          [Email] &nbsp;|&nbsp; [LinkedIn] &nbsp;|&nbsp; [GitHub]
+        </p>
+      </div>
+      <div class="card" style="margin-top:8px; width:100%;">
+        <p style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:6px; font-weight:600; color:var(--neon-cyan);">🔜 Próximas Palestras</p>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <span class="tag">Segurança em Código Gerado por IA</span>
+          <span class="tag">Arquitetura de Sistemas na Era da IA</span>
+          <span class="tag">Como Ensinar Programação em 2026</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /slides-container -->
+
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+<script>
+(function () {
+  'use strict';
+
+  const TOTAL = 20;
+  let current = 0; // 0-based index
+  let startX = null;
+
+  const slides = document.querySelectorAll('.slide');
+  const progressBar = document.getElementById('progress-bar');
+  const counter = document.getElementById('slide-counter');
+  const btnTheme = document.getElementById('btn-theme');
+  const btnFullscreen = document.getElementById('btn-fullscreen');
+  const navPrev = document.getElementById('nav-prev');
+  const navNext = document.getElementById('nav-next');
+
+  /* ---- GOTO SLIDE ---- */
+  function goTo(n) {
+    if (n < 0 || n >= TOTAL) return;
+    const prev = current;
+    slides[prev].classList.remove('active');
+    slides[prev].classList.add('prev');
+    current = n;
+    slides[current].classList.remove('prev');
+    slides[current].classList.add('active');
+    // clean up old prev (slight delay so transition plays)
+    setTimeout(() => {
+      slides.forEach((s, i) => {
+        if (i !== current) { s.classList.remove('active', 'prev'); }
+      });
+    }, 500);
+    updateUI();
+  }
+
+  function updateUI() {
+    const pct = ((current) / (TOTAL - 1)) * 100;
+    progressBar.style.width = pct + '%';
+    counter.textContent = (current + 1) + ' / ' + TOTAL;
+    navPrev.style.opacity = current === 0 ? '0.25' : '0.6';
+    navNext.style.opacity = current === TOTAL - 1 ? '0.25' : '0.6';
+  }
+
+  /* ---- KEYBOARD ---- */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); goTo(current - 1); }
+    else if (e.key === 'ArrowDown') { e.preventDefault(); goTo(current + 1); }
+    else if (e.key === 'f' || e.key === 'F') { toggleFullscreen(); }
+  });
+
+  /* ---- BUTTONS ---- */
+  navPrev.addEventListener('click', () => goTo(current - 1));
+  navNext.addEventListener('click', () => goTo(current + 1));
+
+  /* ---- THEME TOGGLE ---- */
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    btnTheme.textContent = theme === 'dark' ? '🌙 Tema' : '☀️ Tema';
+    localStorage.setItem('pres-theme', theme);
+  }
+
+  btnTheme.addEventListener('click', function () {
+    const current_theme = document.documentElement.getAttribute('data-theme');
+    applyTheme(current_theme === 'dark' ? 'light' : 'dark');
+  });
+
+  // Load saved theme
+  const savedTheme = localStorage.getItem('pres-theme');
+  if (savedTheme) applyTheme(savedTheme);
+
+  /* ---- FULLSCREEN ---- */
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  }
+
+  btnFullscreen.addEventListener('click', toggleFullscreen);
+
+  document.addEventListener('fullscreenchange', function () {
+    btnFullscreen.textContent = document.fullscreenElement ? '✕ Exit' : '⛶ Full';
+  });
+
+  /* ---- TOUCH / SWIPE ---- */
+  document.addEventListener('touchstart', function (e) {
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function (e) {
+    if (startX === null) return;
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) goTo(current + 1);
+      else goTo(current - 1);
+    }
+    startX = null;
+  }, { passive: true });
+
+  /* ---- INIT ---- */
+  updateUI();
+})();
+</script>
+</body>
+</html>
