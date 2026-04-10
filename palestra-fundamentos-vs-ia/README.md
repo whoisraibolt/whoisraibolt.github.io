@@ -262,7 +262,7 @@ Conhecimento = 10 →  Resultado = 10 × IA = Excelência
 ### 🔒 Segurança
 
 - Código sem revisão = vulnerabilidades
-- Vazamentos aumentaram **300% em 2024**
+- Vazamentos aumentaram **300% em 2024*** 
 - IA gera código com brechas
 
 ### 💼 Profissional
@@ -277,6 +277,8 @@ Conhecimento = 10 →  Resultado = 10 × IA = Excelência
 - Alunos não aprendem a pensar
 - Não desenvolvem senso crítico
 - Não resolvem problemas novos
+
+*\* Dado ilustrativo baseado em relatórios de segurança (ex.: IBM Cost of a Data Breach Report, Verizon DBIR). Verifique a fonte mais recente.*
 
 ---
 
